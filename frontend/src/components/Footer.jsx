@@ -1,85 +1,92 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
-import logo from '../assets/logo.png'; 
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0B1120] text-gray-300 pt-16 border-t border-dveinBlue/30">
+    <footer className="bg-[#0B1120] text-gray-300 py-8 border-t border-dveinBlue/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-          
-          {/* About */}
-          <div className="space-y-6">
-            <img src={logo} alt="DVein" className="h-14 w-auto bg-white rounded p-1" />
-            <p className="text-sm leading-relaxed text-gray-400">
-              Transforming ideas into digital reality. DVein Innovations is your partner for custom software, training, and career growth.
-            </p>
-            {/* Social Icons - Always Original Colors */}
-            <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm text-[#1877F2] hover:scale-110 transition-transform hover:shadow-md border border-gray-100">
-                <FaFacebookF />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+
+          {/* Left: Logo + Social Icons */}
+          <div className="flex flex-col gap-4">
+            <img src={logo} alt="DVein" className="h-10 w-auto object-contain" />
+            <div className="flex items-center gap-3 flex-wrap">
+              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#1877F2] hover:scale-110 transition-transform shadow-sm">
+                <FaFacebookF size={14} />
               </a>
-              <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm text-[#1DA1F2] hover:scale-110 transition-transform hover:shadow-md border border-gray-100">
-                <FaTwitter />
+              <a
+                href="https://x.com/dveininnovation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-gray-900 hover:scale-110 transition-transform shadow-sm"
+              >
+                <FaXTwitter size={14} />
               </a>
-              <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm text-[#E4405F] hover:scale-110 transition-transform hover:shadow-md border border-gray-100">
-                <FaInstagram />
+              <a
+                href="https://www.instagram.com/dvein_innovations?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#E4405F] hover:scale-110 transition-transform shadow-sm"
+              >
+                <FaInstagram size={14} />
               </a>
-              <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm text-[#0A66C2] hover:scale-110 transition-transform hover:shadow-md border border-gray-100">
-                <FaLinkedinIn />
+              <a
+                href="https://www.linkedin.com/company/dvein-innovations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#0A66C2] hover:scale-110 transition-transform shadow-sm"
+              >
+                <FaLinkedinIn size={14} />
+              </a>
+              <a
+                href="https://maps.google.com/maps?q=Alpha+City+IT+Park+Navalur+Chennai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-dveinGreen text-white hover:scale-110 transition-transform shadow-sm"
+                title="Get Directions"
+              >
+                <FaMapMarkerAlt size={14} />
               </a>
             </div>
           </div>
 
-          {/* Reach Us */}
+          {/* Center: Reach Us */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-6 border-b-2 border-dveinGreen inline-block pb-1 font-heading">Reach Us</h3>
-            <ul className="space-y-6 text-sm">
-              <li className="flex gap-4 items-start">
-                <FaMapMarkerAlt className="text-dveinGreen mt-1 text-lg shrink-0" />
-                <span className="leading-relaxed">
-                  Alpha City IT Park, No.25, OMR, Navalur, Chennai – 600130
-                </span>
-              </li>
-              <li className="flex gap-4 items-center hover:text-dveinGreen transition-colors">
-                <FaPhoneAlt className="text-dveinGreen text-lg" />
+            <h3 className="text-white text-sm font-bold mb-3 border-b border-dveinGreen inline-block pb-1 uppercase tracking-wider">Reach Us</h3>
+            <div className="flex gap-3 items-start text-sm text-gray-400">
+              <FaMapMarkerAlt className="text-dveinGreen mt-1 shrink-0" />
+              <span className="leading-relaxed">
+                Alpha City IT Park, No.25, OMR,<br />Navalur, Chennai – 600130
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Contact */}
+          <div>
+            <h3 className="text-white text-sm font-bold mb-3 border-b border-dveinGreen inline-block pb-1 uppercase tracking-wider">Contact</h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex gap-3 items-center hover:text-dveinGreen transition-colors">
+                <FaPhoneAlt className="text-dveinGreen shrink-0" />
                 <span>+91 95001 81230</span>
               </li>
-              <li className="flex gap-4 items-center hover:text-dveinGreen transition-colors">
-                <FaEnvelope className="text-dveinGreen text-lg" />
+              <li className="flex gap-3 items-center hover:text-dveinGreen transition-colors">
+                <FaEnvelope className="text-dveinGreen shrink-0" />
                 <span>info@dveininnovations.com</span>
               </li>
             </ul>
           </div>
 
-          {/* Map - FIXED STABLE LINK */}
-          <div>
-            <h3 className="text-white text-lg font-bold mb-6 border-b-2 border-dveinGreen inline-block pb-1 font-heading">Locate Us</h3>
-            {/* Apply the 'map-glow' class here for animation */}
-            <div className="w-full h-48 rounded-xl overflow-hidden border-2 border-dveinGreen map-glow transition-all shadow-lg bg-gray-800">
-               <iframe 
-                title="DVein Location"
-                className="w-full h-full"
-                // This is the Public/Universal Embed Link
-                src="https://maps.google.com/maps?q=Alpha%20City%20SSPDL%20Navalur&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                style={{border:0}} 
-                allowFullScreen="" 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade">
-              </iframe>
-            </div>
-          </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/10 py-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
           <p>© {currentYear} DVein Innovations. All Rights Reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-          </div>
+          <Link to="/privacy" className="hover:text-white transition-colors mt-2 md:mt-0">Privacy Policy</Link>
         </div>
       </div>
     </footer>
