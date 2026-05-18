@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 const WelcomeSection = () => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
-      
+
       {/* Background Decor (Subtle Tech Dots) */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          
+
           {/* Left Side: Content */}
           <div className="lg:w-1/2">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -27,10 +27,10 @@ const WelcomeSection = () => {
                 Welcome To <span className="text-dveinBlue">DVein</span> Innovations
               </h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                We are a dynamic team of passionate tech professionals and educators. We don't just build software; we build careers. Our mission is to bridge the gap between 
+                We are a dynamic team of passionate tech professionals and educators. We don't just build software; we build careers. Our mission is to bridge the gap between
                 <b> Industry Requirements</b> and <b>Academic Learning</b>.
               </p>
-              
+
               <Link
                 to="/our-story"
                 className="inline-flex items-center gap-2 text-white bg-gray-900 hover:bg-dveinBlue px-8 py-3 rounded-lg font-medium transition-all shadow-lg hover:shadow-dveinBlue/30"
@@ -42,9 +42,9 @@ const WelcomeSection = () => {
 
           {/* Right Side: 2 Core Cards (Attractive Layout) */}
           <div className="lg:w-1/2 flex flex-col gap-6">
-            
+
             {/* Card 1: Software */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -66,7 +66,7 @@ const WelcomeSection = () => {
             </motion.div>
 
             {/* Card 2: Training */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}

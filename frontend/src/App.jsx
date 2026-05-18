@@ -21,7 +21,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 // ADMIN AUTH (NEW ADDITION) - Path pathukonga
-import AdminLogin from './pages/Admin/AdminLogin'; 
+import AdminLogin from './pages/Admin/AdminLogin';
 import Dashboard from './pages/Admin/Dashboard';
 
 // FOOTER & WHATSAPP
@@ -33,7 +33,7 @@ const Courses = () => <div className="h-screen flex items-center justify-center 
 
 const Layout = () => {
   const location = useLocation();
-  
+
   // Navbar & Footer should NOT appear on Admin Pages or Our Story Page
   const isHomePage = location.pathname === '/';
   const isAdminPage = location.pathname.startsWith('/admin');
@@ -42,7 +42,7 @@ const Layout = () => {
   return (
     <>
       <ScrollToTop />
-      
+
       {/* Navbar Hide on Home, Admin & Our Story Pages */}
       {!isHomePage && !isAdminPage && !isOurStoryPage && <Navbar />}
 
@@ -58,8 +58,7 @@ const Layout = () => {
         <Route path="/student-projects" element={<StudentProjects />} />
         <Route path="/collaboration" element={<Collaborations />} />
         <Route path="/our-story" element={<OurStory />} />
-        
-        
+
         {/* USER AUTH ROUTES */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
