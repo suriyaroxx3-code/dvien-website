@@ -157,81 +157,75 @@ const storyParagraphs = [
 
 const OurStory = () => {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      {/* Animated background */}
-      <TechieBackground />
+    <div className="relative min-h-screen overflow-x-hidden ai-gradient-bg">
 
-      {/* Content overlay */}
-      <div className="relative z-10 min-h-screen">
-        {/* Back button */}
-        <div className="fixed top-6 left-6 z-20">
-          <Link
-            to="/"
-            className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-white/20 transition-all"
-          >
-            <FaArrowLeft className="text-xs" /> Back to Home
-          </Link>
-        </div>
+      {/* Back button */}
+      <div className="fixed top-6 left-6 z-20">
+        <Link
+          to="/"
+          className="flex items-center gap-2 bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-50 hover:border-indigo-300 transition-all shadow-sm"
+        >
+          <FaArrowLeft className="text-xs" /> Back to Home
+        </Link>
+      </div>
 
-        {/* Main content */}
-        <div className="max-w-3xl mx-auto px-6 py-24">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <span className="inline-block py-1.5 px-5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-bold tracking-[0.25em] uppercase text-xs mb-6">
-              Our Origin
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-              Our <span className="text-cyan-400">Story</span>
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full" />
-          </motion.div>
+      {/* Main content */}
+      <div className="max-w-3xl mx-auto px-6 py-24">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block py-1.5 px-5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold tracking-[0.25em] uppercase text-xs mb-6">
+            Our Origin
+          </span>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-6 leading-tight tracking-tight">
+            Our <span className="text-black">Story</span>
+          </h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 mx-auto rounded-full" />
+        </motion.div>
 
-          {/* Story paragraphs */}
-          <div className="space-y-8">
-            {storyParagraphs.map((para, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
+        {/* Story paragraphs */}
+        <div className="space-y-8">
+          {storyParagraphs.map((para, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: idx * 0.08 }}
+            >
+              <p
+                className={`leading-relaxed font-medium ${
+                  idx === 0
+                    ? 'text-2xl md:text-3xl text-indigo-700 font-bold text-center'
+                    : idx === storyParagraphs.length - 1
+                    ? 'text-xl md:text-2xl text-slate-900 font-extrabold text-center uppercase tracking-widest border border-indigo-100 bg-indigo-50 px-8 py-6 rounded-2xl'
+                    : idx === 2
+                    ? 'text-xl text-slate-700 font-bold text-center'
+                    : 'text-base md:text-lg text-slate-700'
+                }`}
               >
-                <p
-                  className={`leading-relaxed font-medium drop-shadow-lg ${
-                    idx === 0
-                      ? 'text-2xl md:text-3xl text-cyan-300 font-bold text-center italic'
-                      : idx === storyParagraphs.length - 1
-                      ? 'text-xl md:text-2xl text-cyan-200 font-extrabold text-center uppercase tracking-widest border border-cyan-500/30 bg-cyan-900/20 backdrop-blur-sm px-8 py-6 rounded-2xl'
-                      : idx === 2
-                      ? 'text-xl text-blue-200 font-bold text-center italic'
-                      : 'text-base md:text-lg text-gray-100'
-                  }`}
-                  style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}
-                >
-                  {para}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Footer tag */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="text-center mt-20"
-          >
-            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 px-8 py-4 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-slate-400 text-xs uppercase tracking-[0.3em] font-bold">DVein Innovations · Est. 2022</span>
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            </div>
-          </motion.div>
+                {para}
+              </p>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Footer tag */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.5 }}
+          className="text-center mt-20"
+        >
+          <div className="inline-flex items-center gap-3 bg-white border border-slate-100 shadow-sm px-8 py-4 rounded-full">
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+            <span className="text-slate-500 text-xs uppercase tracking-[0.3em] font-bold">DVein Innovations · Est. 2022</span>
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+          </div>
+        </motion.div>
       </div>
     </div>
   );

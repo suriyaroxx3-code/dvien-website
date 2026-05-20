@@ -1,0 +1,42 @@
+/* ============================================================
+   Software Solutions Page — Custom Styles
+   Brand color: #005ff7
+   ============================================================ */
+
+:root {
+  --dvein-brand: #005ff7;
+  --dvein-brand-hover: #0050d0;
+}
+
+/* All headings on the page default to black */
+.ss-page h1,
+.ss-page h2,
+.ss-page h3,
+.ss-page h4 {
+  color: #000000;
+}
+
+/* Preserve white text in dark sections (higher specificity overrides the rule above) */
+.ss-page h1.text-white,
+.ss-page h2.text-white,
+.ss-page h3.text-white,
+.ss-page h4.text-white,
+.ss-page .text-white {
+  color: #ffffff !important;
+}
+
+/* Brand-colored icons */
+.ss-icon {
+  color: var(--dvein-brand) !important;
+}
+
+/* Brand buttons */
+.ss-btn-primary {
+  background-color: var(--dvein-brand) !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.ss-btn-primary:hover {
+  background-color: var(--dvein-brand-hover) !important;
+  transform: translateY(-2px);
+}

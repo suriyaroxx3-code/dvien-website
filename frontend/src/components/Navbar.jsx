@@ -8,6 +8,7 @@ import logo from '../assets/logo.png';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileServiceOpen, setMobileServiceOpen] = useState(false);
+  const [desktopServiceOpen, setDesktopServiceOpen] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminCreds, setAdminCreds] = useState({ username: '', password: '' });
   const [adminLoading, setAdminLoading] = useState(false);
@@ -18,11 +19,23 @@ const Navbar = () => {
   useEffect(() => {
     setIsOpen(false);
     setMobileServiceOpen(false);
+    setDesktopServiceOpen(false);
   }, [location]);
 
   useEffect(() => {
     document.body.style.overflow = (isOpen || showAdminModal) ? 'hidden' : 'unset';
   }, [isOpen, showAdminModal]);
+
+  useEffect(() => {
+    if (!desktopServiceOpen) return;
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('[data-services-dropdown]')) {
+        setDesktopServiceOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [desktopServiceOpen]);
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
@@ -43,7 +56,7 @@ const Navbar = () => {
       } else {
         setAdminError(data.message || 'Invalid credentials');
       }
-    } catch {
+    } catch (err) {
       setAdminError('Server unavailable. Ensure backend is running.');
     } finally {
       setAdminLoading(false);
@@ -92,18 +105,37 @@ const Navbar = () => {
               {navLinks.map((item) => {
                 if (item.subLinks) {
                   return (
-                    <div key={item.name} className="relative group h-full flex items-center">
-                      <button className="flex items-center gap-1 text-gray-700 hover:text-dveinBlue font-extrabold text-[12px] uppercase tracking-wider transition-colors relative h-full">
-                        {item.name} <HiChevronDown className="text-lg mb-[2px]" />
-                        <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-dveinBlue transition-all duration-300 group-hover:w-full rounded-t-full"></span>
+                    <div key={item.name} className="relative h-full flex items-center" data-services-dropdown="true">
+                      <button
+                        onClick={() => setDesktopServiceOpen((prev) => !prev)}
+                        className="flex items-center gap-1 text-gray-700 hover:text-dveinBlue font-extrabold text-[12px] uppercase tracking-wider transition-colors relative h-full"
+                      >
+                        {item.name}
+                        <HiChevronDown className={`text-lg mb-[2px] transition-transform duration-200 ${desktopServiceOpen ? 'rotate-180' : ''}`} />
+                        <span className={`absolute bottom-0 left-0 h-[3px] bg-dveinBlue transition-all duration-300 rounded-t-full ${desktopServiceOpen ? 'w-full' : 'w-0'}`}></span>
                       </button>
-                      <div className="absolute top-[80px] left-0 w-64 bg-white border border-gray-100 shadow-2xl rounded-b-2xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                        {item.subLinks.map((sub) => (
-                          <Link key={sub.name} to={sub.path} className="block px-6 py-4 text-gray-700 hover:bg-slate-50 hover:text-dveinBlue text-[11px] font-black transition-colors border-b border-gray-50 last:border-0 uppercase tracking-widest">
-                            {sub.name}
-                          </Link>
-                        ))}
-                      </div>
+                      <AnimatePresence>
+                        {desktopServiceOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 8 }}
+                            transition={{ duration: 0.18 }}
+                            className="absolute top-[80px] left-0 w-64 bg-white border border-gray-100 shadow-2xl rounded-b-2xl overflow-hidden z-50"
+                          >
+                            {item.subLinks.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                to={sub.path}
+                                onClick={() => setDesktopServiceOpen(false)}
+                                className="block px-6 py-4 text-gray-700 hover:bg-slate-50 hover:text-dveinBlue text-[11px] font-black transition-colors border-b border-gray-50 last:border-0 uppercase tracking-widest"
+                              >
+                                {sub.name}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   );
                 }

@@ -4,7 +4,7 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  color: #374151;           /* textBody — warm dark gray */
+  color: #374151;
   background-color: #ffffff;
   overflow-x: hidden;
   font-size: 16px;
@@ -15,14 +15,31 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', sans-serif;
-  color: #0D1117;           /* textPrimary — deep near-black */
-  letter-spacing: -0.02em; /* Space Grotesk looks best slightly tight */
+  color: #0D1117;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 /* Tech tags and code-style elements */
 .font-mono, code, pre {
   font-family: 'JetBrains Mono', monospace;
+}
+
+/* Always preserve white headings in dark sections */
+h1.text-white, h2.text-white, h3.text-white,
+h4.text-white, h5.text-white, h6.text-white {
+  color: #ffffff !important;
+}
+
+/* DVein branded button: #005ff7 base, white on hover */
+.btn-brand {
+  background-color: #005ff7 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.btn-brand:hover {
+  background-color: #ffffff !important;
+  color: #005ff7 !important;
 }
 
 /* DVein brand accent overrides */
@@ -46,9 +63,9 @@ a:hover {
 /* --- 1. CINEMATIC BACKGROUND --- */
 .ai-gradient-bg {
   background-color: #ffffff;
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,90%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,90%,1) 0, transparent 50%), 
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253,16%,90%,1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225,39%,90%,1) 0, transparent 50%),
     radial-gradient(at 100% 0%, hsla(339,49%,90%,1) 0, transparent 50%);
   background-attachment: fixed;
 }
@@ -67,22 +84,22 @@ a:hover {
 /* Show & Style Dots (Pagination) */
 .swiper-pagination {
   position: absolute;
-  bottom: 0px !important; /* Move dots below card */
+  bottom: 0px !important;
   display: block !important;
 }
 
 .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
-  background: #CBD5E1; /* Light Gray */
+  background: #CBD5E1;
   opacity: 1;
   transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-  width: 25px; /* Long active dot */
+  width: 25px;
   border-radius: 5px;
-  background: #0056D2 !important; /* DVein Blue */
+  background: #0056D2 !important;
 }
 
 /* Ensure Slides have equal height */
@@ -101,11 +118,7 @@ a:hover {
 .map-glow {
   animation: map-pulse 2s infinite;
   border: 2px solid #10B981;
-
-
 }
-
-
 
 /* --- 5. CLIENT MARQUEE --- */
 @keyframes marquee {
@@ -113,55 +126,3 @@ a:hover {
   100% { transform: translateX(-50%); }
 }
 .animate-marquee { animation: marquee 30s linear infinite; display: flex; width: max-content; }
-
-/* --- 6. FOOTER FLOATING ICONS --- */
-@keyframes footer-float {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); }
-  25% { transform: translateY(-8px) translateX(4px) rotate(4deg); }
-  50% { transform: translateY(-14px) translateX(-6px) rotate(-6deg); }
-  75% { transform: translateY(-8px) translateX(6px) rotate(3deg); }
-  100% { transform: translateY(0) translateX(0) rotate(0deg); }
-}
-
-.floating-icon {
-  animation: footer-float 4.6s ease-in-out infinite;
-  will-change: transform;
-  filter: drop-shadow(0 10px 20px rgba(2,6,23,0.45));
-}
-.float-1 { animation-delay: 0s; }
-.float-2 { animation-delay: 0.5s; animation-duration: 5.2s; }
-.float-3 { animation-delay: 1s; animation-duration: 5.6s; }
-.float-4 { animation-delay: 0.3s; animation-duration: 4.8s; }
-
-/* Slightly larger floats on wider screens */
-@media (min-width: 768px) {
-  .floating-icon { transform-origin: center; }
-}
-
-/* Transparent bubble style for icons inside footer */
-.floating-bubble {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  backdrop-filter: blur(4px);
-  color: rgba(255,255,255,0.95);
-  transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
-}
-.floating-bubble:hover { transform: translateY(-6px) scale(1.06); background: rgba(255,255,255,0.04); box-shadow: 0 10px 24px rgba(2,6,23,0.45); }
-
-@media (max-width: 480px) {
-  .floating-bubble { width: 40px; height: 40px; }
-}
-
-/* --- 7. FOOTER MARQUEE / SCROLL --- */
-@keyframes footer-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.footer-marquee { width: 100%; }
-.footer-marquee-track { display: flex; width: max-content; align-items: center; gap: 24px; animation: footer-marquee 22s linear infinite; }
-.footer-marquee-track:hover { animation-play-state: paused; }
-.footer-marquee-group { display: flex; gap: 24px; align-items: center; }
-
-@media (prefers-reduced-motion: reduce) {
-  .footer-marquee-track { animation: none; }
-}

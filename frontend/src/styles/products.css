@@ -1,0 +1,25 @@
+/* ============================================================
+   Products Page — Custom Styles
+   ============================================================ */
+
+:root {
+  --dvein-brand: #005ff7;
+}
+
+.products-page h1,
+.products-page h2,
+.products-page h3 {
+  color: #000000;
+}
+
+.products-icon {
+  color: var(--dvein-brand) !important;
+}
+
+.products-btn {
+  background-color: var(--dvein-brand) !important;
+  color: #ffffff !important;
+}
+.products-btn:hover {
+  background-color: #0050d0 !important;
+}

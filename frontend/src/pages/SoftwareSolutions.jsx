@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// Link removed — all CTAs now go to WhatsApp
 import {
   FaCode, FaMobileAlt, FaBrain, FaCloud, FaDatabase, FaShieldAlt,
   FaCheckCircle, FaAws, FaRocket, FaHeadset, FaChartLine, FaLaptopCode,
@@ -8,10 +7,13 @@ import {
   FaSearch, FaPencilRuler, FaCogs, FaLifeRing
 } from 'react-icons/fa';
 import AnimatedRoadmap from '../components/AnimatedRoadmap';
-import { 
-  SiReact, SiNodedotjs, SiPython, SiMongodb, SiPostgresql, 
-  SiDocker, SiTensorflow, SiFlutter, SiFirebase 
+import {
+  SiReact, SiNodedotjs, SiPython, SiMongodb, SiPostgresql,
+  SiDocker, SiTensorflow, SiFlutter, SiFirebase
 } from 'react-icons/si';
+import '../styles/software-solutions.css';
+
+const BRAND = '#005ff7';
 
 const servicesList = [
   { icon: <FaBrain />, title: "AI & Machine Learning", desc: "Automate complex tasks with custom AI models, NLP for chatbots, and predictive analytics to forecast business trends." },
@@ -37,10 +39,10 @@ const industries = [
 ];
 
 const techCategories = [
-  { title: "Frontend", stack: [{ icon: <SiReact className="text-cyan-400" />, name: "React.js" }, { icon: <FaCode className="text-orange-500" />, name: "Next.js" }, { icon: <FaCode className="text-blue-500" />, name: "Tailwind" }] },
-  { title: "Backend", stack: [{ icon: <SiNodedotjs className="text-green-600" />, name: "Node.js" }, { icon: <SiPython className="text-blue-400" />, name: "Python" }, { icon: <FaCode className="text-blue-600" />, name: "FastAPI" }] },
-  { title: "Database", stack: [{ icon: <SiMongodb className="text-green-500" />, name: "MongoDB" }, { icon: <SiPostgresql className="text-blue-700" />, name: "PostgreSQL" }, { icon: <SiFirebase className="text-yellow-500" />, name: "Firebase" }] },
-  { title: "Cloud & AI", stack: [{ icon: <FaAws className="text-orange-500" />, name: "AWS" }, { icon: <SiDocker className="text-blue-500" />, name: "Docker" }, { icon: <SiTensorflow className="text-orange-600" />, name: "TensorFlow" }] },
+  { title: "Frontend", stack: [{ icon: <SiReact style={{ color: '#005ff7' }} />, name: "React.js" }, { icon: <FaCode style={{ color: '#005ff7' }} />, name: "Next.js" }, { icon: <FaCode style={{ color: '#005ff7' }} />, name: "Tailwind" }] },
+  { title: "Backend", stack: [{ icon: <SiNodedotjs style={{ color: '#005ff7' }} />, name: "Node.js" }, { icon: <SiPython style={{ color: '#005ff7' }} />, name: "Python" }, { icon: <FaCode style={{ color: '#005ff7' }} />, name: "FastAPI" }] },
+  { title: "Database", stack: [{ icon: <SiMongodb style={{ color: '#005ff7' }} />, name: "MongoDB" }, { icon: <SiPostgresql style={{ color: '#005ff7' }} />, name: "PostgreSQL" }, { icon: <SiFirebase style={{ color: '#005ff7' }} />, name: "Firebase" }] },
+  { title: "Cloud & AI", stack: [{ icon: <FaAws style={{ color: '#005ff7' }} />, name: "AWS" }, { icon: <SiDocker style={{ color: '#005ff7' }} />, name: "Docker" }, { icon: <SiTensorflow style={{ color: '#005ff7' }} />, name: "TensorFlow" }] },
 ];
 
 const faqs = [
@@ -57,49 +59,52 @@ const SoftwareSolutions = () => {
   const [activeAccordion, setActiveAccordion] = useState(null);
 
   return (
-    // ✨ MIXED COLOR BACKGROUND (Consistent Theme) ✨
-    <div className="font-sans text-gray-900 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen pt-24 pb-16 selection:bg-blue-500 selection:text-white">
-      
-      {/* === HERO SECTION === */}
+    <div className="ss-page font-sans text-gray-900 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen pt-24 pb-16">
+
+      {/* === HERO === */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <span className="inline-block py-1 px-3 rounded-full bg-white border border-blue-100 text-blue-600 text-sm font-bold tracking-wider mb-4 shadow-sm">
-              ENGINEERING EXCELLENCE
-            </span>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 font-heading mb-6 leading-tight">
-             Transforming Ideas into <br/>
-             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-600">Digital Reality</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          <span className="inline-block py-1 px-3 rounded-full bg-white border border-blue-100 text-black text-sm font-bold tracking-wider mb-4 shadow-sm">
+            ENGINEERING EXCELLENCE
+          </span>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-black font-heading mb-6 leading-tight">
+            Transforming Ideas into <br/>
+            <span className="text-black">Digital Reality</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
             We are a full-cycle software development company. From conceptualization to deployment, we build robust, scalable, and secure digital products.
-            </p>
-            <div className="flex justify-center gap-4">
-               <button
-                 onClick={() => openWA_SS('Hello DVein Team, I want to start a software project with you.')}
-                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 hover:-translate-y-1 transition-all"
-               >Start Your Project</button>
-               <button onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold shadow-sm hover:bg-gray-50 transition-all">Explore Services</button>
-            </div>
+          </p>
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => openWA_SS('Hello DVein Team, I want to start a software project with you.')}
+              className="ss-btn-primary px-8 py-4 rounded-xl font-bold shadow-lg"
+              style={{ backgroundColor: BRAND }}
+            >Start Your Project</button>
+            <button
+              onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold shadow-sm hover:bg-gray-50 transition-all"
+            >Explore Services</button>
+          </div>
         </motion.div>
       </div>
 
       {/* === WHY CHOOSE US === */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-           {features.map((feature, i) => (
-             <motion.div 
-               key={i}
-               initial={{ opacity: 0, y: 20 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ delay: i * 0.1 }}
-               className="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/50 shadow-sm hover:shadow-md transition-all"
-             >
-                <div className="text-3xl text-blue-600 mb-4">{feature.icon}</div>
-                <h3 className="font-bold text-gray-900 text-lg mb-2">{feature.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
-             </motion.div>
-           ))}
+          {features.map((feature, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/50 shadow-sm hover:shadow-md transition-all"
+            >
+              <div className="text-3xl mb-4" style={{ color: BRAND }}>{feature.icon}</div>
+              <h3 className="font-bold text-black text-lg mb-2">{feature.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -109,151 +114,148 @@ const SoftwareSolutions = () => {
         subtitle="A transparent, agile workflow engineered for speed, quality, and scale."
         accent="bg-blue-500"
         steps={[
-          { icon: <FaSearch />,      label: 'Requirement Analysis',  desc: 'Deep dive into your goals, users, and technical needs to define the perfect scope.', color: 'bg-blue-600' },
-          { icon: <FaPencilRuler />, label: 'UI/UX & Architecture',  desc: 'Design system blueprints, wireframes, and scalable tech architecture.', color: 'bg-blue-600' },
-          { icon: <FaCogs />,        label: 'Development & QA',      desc: 'Agile sprints with continuous testing, code reviews, and performance benchmarks.', color: 'bg-blue-600' },
-          { icon: <FaLifeRing />,    label: 'Deployment & Support',  desc: 'CI/CD pipeline launch, monitoring setup, and round-the-clock post-launch support.', color: 'bg-cyan-600' },
+          { icon: <FaSearch />,      label: 'Requirement Analysis', desc: 'Deep dive into your goals, users, and technical needs to define the perfect scope.', color: 'bg-indigo-600' },
+          { icon: <FaPencilRuler />, label: 'UI/UX & Architecture',  desc: 'Design system blueprints, wireframes, and scalable tech architecture.',              color: 'bg-violet-600' },
+          { icon: <FaCogs />,        label: 'Development & QA',      desc: 'Agile sprints with continuous testing, code reviews, and performance benchmarks.',    color: 'bg-blue-600'   },
+          { icon: <FaLifeRing />,    label: 'Deployment & Support',  desc: 'CI/CD pipeline launch, monitoring setup, and round-the-clock post-launch support.',   color: 'bg-cyan-600'   },
         ]}
       />
 
       {/* === KEY SERVICES === */}
-      <div id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-         <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Core Competencies</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">We leverage cutting-edge technology to solve complex challenges.</p>
-         </div>
-
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesList.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300"
-              >
-                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl text-blue-600 mb-6">
-                    {service.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">{service.desc}</p>
-                <div className="flex items-center gap-2 text-blue-700 text-sm font-bold">
-                    <FaCheckCircle /> Enterprise Grade
-                </div>
-              </motion.div>
-            ))}
-         </div>
+      <div id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 mt-24">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-black mb-4">Our Core Competencies</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">We leverage cutting-edge technology to solve complex challenges.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {servicesList.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl mb-6" style={{ color: BRAND }}>
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-bold text-black mb-3">{service.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-6">{service.desc}</p>
+              <div className="flex items-center gap-2 text-sm font-bold" style={{ color: BRAND }}>
+                <FaCheckCircle /> Enterprise Grade
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
-      {/* === INDUSTRIES === */}
+      {/* === INDUSTRIES (dark section — white text kept) === */}
       <div className="bg-[#0f172a] py-20 mb-24 text-white relative overflow-hidden">
-         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <span className="text-blue-400 font-bold tracking-widest uppercase text-sm">Industries</span>
-                    <h2 className="text-4xl font-bold mt-2 mb-6">Software for Every Sector</h2>
-                    <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                        Our technical expertise spans across various industries. We understand the unique challenges and compliance requirements of your sector.
-                    </p>
-                    <button
-                      onClick={() => openWA_SS('Hello DVein Team, I would like to schedule a consultation for software development.')}
-                      className="text-blue-400 font-bold hover:underline flex items-center gap-2"
-                    >
-                      Schedule a Consultation <FaArrowRight />
-                    </button>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                    {industries.map((ind, i) => (
-                        <div key={i} className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-colors">
-                            <div className="text-3xl text-blue-400 mb-3">{ind.icon}</div>
-                            <h4 className="font-bold text-lg">{ind.name}</h4>
-                            <p className="text-sm text-gray-400 mt-1">{ind.desc}</p>
-                        </div>
-                    ))}
-                </div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="font-bold tracking-widest uppercase text-sm" style={{ color: BRAND }}>Industries</span>
+              <h2 className="text-4xl font-bold mt-2 mb-6 text-white">Software for Every Sector</h2>
+              <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                Our technical expertise spans across various industries. We understand the unique challenges and compliance requirements of your sector.
+              </p>
+              <button
+                onClick={() => openWA_SS('Hello DVein Team, I would like to schedule a consultation for software development.')}
+                className="font-bold hover:underline flex items-center gap-2"
+                style={{ color: BRAND }}
+              >
+                Schedule a Consultation <FaArrowRight />
+              </button>
             </div>
-         </div>
+            <div className="grid grid-cols-2 gap-4">
+              {industries.map((ind, i) => (
+                <div key={i} className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-colors">
+                  <div className="text-3xl mb-3" style={{ color: BRAND }}>{ind.icon}</div>
+                  <h4 className="font-bold text-lg text-white">{ind.name}</h4>
+                  <p className="text-sm text-gray-400 mt-1">{ind.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* === TECH STACK === */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-         <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Technology Stack</h2>
-         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {techCategories.map((cat, i) => (
-                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
-                    <h4 className="font-bold text-gray-900 mb-4 uppercase text-sm tracking-wider">{cat.title}</h4>
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {cat.stack.map((tool, j) => (
-                            <div key={j} className="flex flex-col items-center">
-                                <div className="text-2xl mb-1">{tool.icon}</div>
-                                <span className="text-xs text-gray-500">{tool.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ))}
-         </div>
+        <h2 className="text-3xl font-bold text-center text-black mb-12">Technology Stack</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {techCategories.map((cat, i) => (
+            <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
+              <h4 className="font-bold text-black mb-4 uppercase text-sm tracking-wider">{cat.title}</h4>
+              <div className="flex flex-wrap justify-center gap-3">
+                {cat.stack.map((tool, j) => (
+                  <div key={j} className="flex flex-col items-center">
+                    <div className="text-2xl mb-1">{tool.icon}</div>
+                    <span className="text-xs text-gray-500">{tool.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* === FAQ === */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                  <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                      <button 
-                        onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}
-                        className="w-full flex justify-between items-center p-5 text-left font-bold text-gray-800 hover:bg-gray-50 transition-colors"
-                      >
-                          {faq.question}
-                          {activeAccordion === index ? <FaChevronUp className="text-blue-600"/> : <FaChevronDown className="text-gray-400"/>}
-                      </button>
-                      <AnimatePresence>
-                        {activeAccordion === index && (
-                            <motion.div 
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                className="bg-gray-50 px-5 pb-5 pt-0 text-gray-600 leading-relaxed"
-                            >
-                                {faq.answer}
-                            </motion.div>
-                        )}
-                      </AnimatePresence>
-                  </div>
-              ))}
-          </div>
+        <h2 className="text-3xl font-bold text-center text-black mb-10">Frequently Asked Questions</h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+              <button
+                onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}
+                className="w-full flex justify-between items-center p-5 text-left font-bold text-black hover:bg-gray-50 transition-colors"
+              >
+                {faq.question}
+                {activeAccordion === index
+                  ? <FaChevronUp style={{ color: BRAND }}/>
+                  : <FaChevronDown className="text-gray-400"/>}
+              </button>
+              <AnimatePresence>
+                {activeAccordion === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="bg-gray-50 px-5 pb-5 pt-0 text-gray-600 leading-relaxed"
+                  >
+                    {faq.answer}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* === CTA SECTION === */}
+      {/* === CTA === */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-[2.5rem] p-10 md:p-20 overflow-hidden bg-[#0a0f1c] text-center border border-white/10 shadow-2xl group">
-              
-              {/* Dynamic Glow Background */}
-              <div className="absolute top-0 left-0 w-full h-full bg-grid-white/[0.05]"></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] group-hover:bg-blue-600/30 transition-all duration-700"></div>
-              
-              {/* Content */}
-              <div className="relative z-10">
-                  <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-                    Ready to Start Your <br/>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">Digital Evolution?</span>
-                  </h2>
-                  <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                    No commitment. Just a friendly conversation about your goals and how we can help you achieve them.
-                  </p>
-                  
-                  <button
-                    onClick={() => openWA_SS('Hello DVein Team, I would like to get a free quote for my software project.')}
-                    className="px-10 py-5 bg-white text-gray-900 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-3 mx-auto shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]"
-                  >
-                    Get a Free Quote <FaArrowRight />
-                  </button>
-              </div>
+        <div className="relative rounded-[2.5rem] p-10 md:p-20 overflow-hidden bg-[#0a0f1c] text-center border border-white/10 shadow-2xl group">
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-white/[0.05]"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] group-hover:bg-blue-600/30 transition-all duration-700"></div>
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
+              Ready to Start Your <br/>
+              <span className="text-white">Digital Evolution?</span>
+            </h2>
+            <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+              No commitment. Just a friendly conversation about your goals and how we can help you achieve them.
+            </p>
+            <button
+              onClick={() => openWA_SS('Hello DVein Team, I would like to get a free quote for my software project.')}
+              className="px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-3 mx-auto shadow-[0_0_40px_-10px_rgba(0,95,247,0.4)]"
+              style={{ backgroundColor: '#005ff7', color: '#ffffff' }}
+            >
+              Get a Free Quote <FaArrowRight />
+            </button>
           </div>
+        </div>
       </div>
 
     </div>

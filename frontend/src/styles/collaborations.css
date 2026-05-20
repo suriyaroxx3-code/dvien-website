@@ -1,0 +1,25 @@
+/* ============================================================
+   Collaborations Page — Custom Styles
+   ============================================================ */
+
+:root {
+  --dvein-brand: #005ff7;
+}
+
+.collab-page h1,
+.collab-page h2,
+.collab-page h3 {
+  color: #000000;
+}
+
+.collab-icon {
+  color: var(--dvein-brand) !important;
+}
+
+.collab-btn {
+  background-color: var(--dvein-brand) !important;
+  color: #ffffff !important;
+}
+.collab-btn:hover {
+  background-color: #0050d0 !important;
+}

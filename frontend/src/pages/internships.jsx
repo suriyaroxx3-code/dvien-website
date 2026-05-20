@@ -57,7 +57,7 @@ const Training = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const WA_NUMBER = '918667363893';
+  const WA_NUMBER = '918667363896';
 
   useEffect(() => {
     fetch('http://localhost:5000/api/public/training-page')

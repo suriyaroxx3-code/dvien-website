@@ -5,7 +5,7 @@ import {
   FaInstagram, FaWhatsapp, FaArrowRight, FaClock, FaCheckCircle 
 } from 'react-icons/fa';
 
-const WA_OTHER = '918667363893';
+const WA_OTHER = '918667363896';
 
 const Contact = () => {
   const [formState, setFormState] = useState({ name: '', email: '', service: '', message: '' });
