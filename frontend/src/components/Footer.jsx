@@ -2,13 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { SiPython, SiDocker, SiNodedotjs, SiReact, SiGithub } from 'react-icons/si';
 import logo from '../assets/logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0B1120] text-gray-300 py-8 border-t border-dveinBlue/30">
+    <footer className="relative bg-[#0B1120] text-gray-300 py-8 border-t border-dveinBlue/30">
+      {/* Floating icons inside footer (transparent bubbles) */}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
 
@@ -96,6 +99,24 @@ const Footer = () => {
             </ul>
           </div>
 
+        </div>
+        {/* Floating icons (separate centered row inside footer) */}
+        <div className="flex justify-center gap-3 mb-6">
+          <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center rounded-full floating-bubble floating-icon float-1 bg-yellow-400" title="Python">
+            <SiPython size={18} color="#3776AB" />
+          </a>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center rounded-full floating-bubble floating-icon float-2 bg-gray-900" title="GitHub">
+            <SiGithub size={18} color="#FFFFFF" />
+          </a>
+          <a href="https://react.dev/learn/installation" target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center rounded-full floating-bubble floating-icon float-3" title="React">
+            <SiReact size={18} color="#61DAFB" />
+          </a>
+          <a href="https://docs.docker.com/desktop/setup/install/windows-install/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center rounded-full floating-bubble floating-icon float-4" title="Docker">
+            <SiDocker size={18} color="#2496ED" />
+          </a>
+          <a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center rounded-full floating-bubble floating-icon float-2" title="Node.js">
+            <SiNodedotjs size={18} color="#339933" />
+          </a>
         </div>
 
         {/* Copyright */}

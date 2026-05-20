@@ -113,3 +113,55 @@ a:hover {
   100% { transform: translateX(-50%); }
 }
 .animate-marquee { animation: marquee 30s linear infinite; display: flex; width: max-content; }
+
+/* --- 6. FOOTER FLOATING ICONS --- */
+@keyframes footer-float {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  25% { transform: translateY(-8px) translateX(4px) rotate(4deg); }
+  50% { transform: translateY(-14px) translateX(-6px) rotate(-6deg); }
+  75% { transform: translateY(-8px) translateX(6px) rotate(3deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+.floating-icon {
+  animation: footer-float 4.6s ease-in-out infinite;
+  will-change: transform;
+  filter: drop-shadow(0 10px 20px rgba(2,6,23,0.45));
+}
+.float-1 { animation-delay: 0s; }
+.float-2 { animation-delay: 0.5s; animation-duration: 5.2s; }
+.float-3 { animation-delay: 1s; animation-duration: 5.6s; }
+.float-4 { animation-delay: 0.3s; animation-duration: 4.8s; }
+
+/* Slightly larger floats on wider screens */
+@media (min-width: 768px) {
+  .floating-icon { transform-origin: center; }
+}
+
+/* Transparent bubble style for icons inside footer */
+.floating-bubble {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.95);
+  transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
+}
+.floating-bubble:hover { transform: translateY(-6px) scale(1.06); background: rgba(255,255,255,0.04); box-shadow: 0 10px 24px rgba(2,6,23,0.45); }
+
+@media (max-width: 480px) {
+  .floating-bubble { width: 40px; height: 40px; }
+}
+
+/* --- 7. FOOTER MARQUEE / SCROLL --- */
+@keyframes footer-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.footer-marquee { width: 100%; }
+.footer-marquee-track { display: flex; width: max-content; align-items: center; gap: 24px; animation: footer-marquee 22s linear infinite; }
+.footer-marquee-track:hover { animation-play-state: paused; }
+.footer-marquee-group { display: flex; gap: 24px; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-marquee-track { animation: none; }
+}
