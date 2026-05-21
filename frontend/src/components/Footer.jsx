@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { useContent } from '../context/ContentContext';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiPython, SiDocker, SiNodedotjs, SiReact, SiGithub } from 'react-icons/si';
 import logo from '../assets/logo.png';
@@ -23,7 +24,24 @@ const GoogleMapsIcon = ({ size = 18 }) => (
 );
 
 const Footer = () => {
+  const { content } = useContent();
+  const cms = content.footer;
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const clickCountRef = useRef(0);
+  const clickTimerRef = useRef(null);
+
+  // Hidden admin trigger: 5 rapid clicks on the logo
+  const handleLogoClick = () => {
+    clickCountRef.current += 1;
+    clearTimeout(clickTimerRef.current);
+    if (clickCountRef.current >= 5) {
+      clickCountRef.current = 0;
+      navigate('/admin/login');
+      return;
+    }
+    clickTimerRef.current = setTimeout(() => { clickCountRef.current = 0; }, 2000);
+  };
 
   return (
     <footer className="relative bg-[#0B1120] text-gray-300 py-8 border-t border-dveinBlue/30">
@@ -34,7 +52,14 @@ const Footer = () => {
 
           {/* Left: Logo + Social Icons — centered */}
           <div className="flex flex-col items-center gap-4 text-center">
-            <img src={logo} alt="DVein" className="h-10 w-auto object-contain" />
+            <img
+              src={logo}
+              alt="DVein"
+              className="h-10 w-auto object-contain cursor-pointer select-none"
+              onClick={handleLogoClick}
+              draggable={false}
+              title=""
+            />
             <div className="flex items-center justify-center gap-3 flex-wrap">
               <a
                 href="https://www.facebook.com/share/1752aXvNUP/"
@@ -85,8 +110,8 @@ const Footer = () => {
             <h3 className="text-white text-sm font-bold mb-3 border-b border-dveinGreen inline-block pb-1 uppercase tracking-wider">Reach Us</h3>
             <div className="flex gap-3 items-start text-sm text-gray-400 justify-center">
               <FaMapMarkerAlt className="text-dveinGreen mt-1 shrink-0" />
-              <span className="leading-relaxed text-center">
-                Alpha City IT Park, No.25, OMR,<br />Navalur, Chennai – 600130
+              <span className="leading-relaxed text-center" style={{ whiteSpace: 'pre-line' }}>
+                {cms?.address || 'Alpha City IT Park, No.25, OMR,\nNavalur, Chennai – 600130'}
               </span>
             </div>
           </div>
@@ -97,20 +122,20 @@ const Footer = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <a
-                  href="tel:+919500181230"
+                  href={`tel:${(cms?.phone || '+919500181230').replace(/[\s-]/g, '')}`}
                   className="flex items-center justify-center gap-2 hover:text-dveinGreen transition-colors group"
                 >
                   <FaPhoneAlt className="text-dveinGreen shrink-0" />
-                  <span>+91 95001 81230</span>
+                  <span>{cms?.phone || '+91 95001 81230'}</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@dveininnovations.com"
+                  href={`mailto:${cms?.email || 'info@dveininnovations.com'}`}
                   className="flex items-center justify-center gap-2 hover:text-dveinGreen transition-colors group"
                 >
                   <FaEnvelope className="text-dveinGreen shrink-0" />
-                  <span>info@dveininnovations.com</span>
+                  <span>{cms?.email || 'info@dveininnovations.com'}</span>
                 </a>
               </li>
             </ul>
@@ -138,7 +163,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-          <p>© {currentYear} DVein Innovations. All Rights Reserved.</p>
+          <p>© {currentYear} {cms?.copyright || 'DVein Innovations. All Rights Reserved.'}</p>
           <Link to="/privacy" className="hover:text-white transition-colors mt-2 md:mt-0">Privacy Policy</Link>
         </div>
       </div>

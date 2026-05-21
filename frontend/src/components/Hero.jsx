@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useContent } from '../context/ContentContext';
 
-const slides = [
+const defaultSlides = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=100&w=2070&auto=format&fit=crop",
@@ -39,14 +40,19 @@ const slides = [
 ];
 
 const Hero = () => {
+  const { content } = useContent();
+  const slides = (content.hero?.slides?.length ? content.hero.slides : defaultSlides);
+
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => { setCurrent(0); }, [slides.length]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="relative w-full h-[85vh] md:h-[700px] overflow-hidden flex items-center pb-12 md:pb-24 font-sans bg-gray-900">

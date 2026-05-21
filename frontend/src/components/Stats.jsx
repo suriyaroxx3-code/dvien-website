@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useContent } from '../context/ContentContext';
 
-const stats = [
+const defaultStats = [
   { id: 1, name: 'Projects Completed', value: '50+' },
   { id: 2, name: 'Students Trained', value: '200+' },
   { id: 3, name: 'Happy Clients', value: '20+' },
@@ -9,6 +10,8 @@ const stats = [
 ];
 
 const Stats = () => {
+  const { content } = useContent();
+  const stats = (content.stats?.length ? content.stats : defaultStats);
   return (
     <div className="bg-white py-12 border-b border-gray-100">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

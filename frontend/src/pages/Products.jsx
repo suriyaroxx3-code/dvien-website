@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fa';
 import AnimatedRoadmap from '../components/AnimatedRoadmap';
 import '../styles/products.css';
+import { useContent } from '../context/ContentContext';
 import compack1 from '../assets/compack1.png';
 import compack2 from '../assets/compack2.png';
 import compack3 from '../assets/compack3.png';
@@ -60,6 +61,9 @@ const ecommerceProduct = {
 };
 
 const ProductsPage = () => {
+  const { content } = useContent();
+  const cms = content.products;
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeAccordion, setActiveAccordion] = useState(null);
@@ -119,24 +123,35 @@ const ProductsPage = () => {
     );
   };
 
-  const architecturalDNA = [
+  const staticDNA = [
     { icon: <FaBolt />, title: "Quantum Sync", desc: "Low-latency data kernels for high-speed enterprise nodes synchronized globally." },
     { icon: <FaShieldAlt />, title: "Zero-Trust Mesh", desc: "Multi-layered identity validation nodes ensure secure cluster environments." },
     { icon: <FaSync />, title: "Immutable Sync", desc: "System logs mirrored on private ledgers for audit accuracy." }
   ];
+  const architecturalDNA = staticDNA.map((d, i) => ({
+    ...d,
+    title: cms?.dna?.items?.[i]?.title ?? d.title,
+    desc:  cms?.dna?.items?.[i]?.desc  ?? d.desc,
+  }));
 
-  const RoadmapSteps = [
+  const staticRoadmapSteps = [
     { id: "01", t: "Technical Discovery", d: "Identifying scaling bottlenecks in current tech stacks." },
     { id: "02", t: "Architecture Build", d: "Designing customized clusters for production load." },
     { id: "03", t: "Mesh Integration", d: "Securing nodes and performing vulnerability scans." },
     { id: "04", t: "Global Activation", d: "Zero-downtime deployment across global nodes." }
   ];
+  const RoadmapSteps = staticRoadmapSteps.map((s, i) => ({
+    ...s,
+    t: cms?.roadmap?.steps?.[i]?.label ?? s.t,
+    d: cms?.roadmap?.steps?.[i]?.desc  ?? s.d,
+  }));
 
-  const reviews = [
+  const staticReviews = [
     { id: 1, name: "Karthik R.", role: "HR Operations Lead", text: "The HRM software made attendance, leave approvals, payroll checks, and employee records much easier to manage from one dashboard.", rating: 5 },
     { id: 2, name: "Meena S.", role: "Warehouse Manager", text: "The inventory system helped our team track stock, billing, quotations, and product movement without depending on manual sheets.", rating: 5 },
     { id: 3, name: "Rahul V.", role: "Retail Business Owner", text: "Smart E-commerce gave us a clean product catalog, faster billing, stock alerts, and simple order handling for daily store operations.", rating: 5 }
   ];
+  const reviews = (cms?.reviews?.items?.length ? cms.reviews.items : staticReviews);
 
   return (
     <div className="font-sans text-slate-900 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen pt-24 pb-16">
@@ -145,16 +160,15 @@ const ProductsPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <span className="inline-block py-1.5 px-4 rounded-full bg-white text-indigo-600 font-semibold tracking-wide text-xs mb-6 border border-indigo-100 shadow-sm">
-            Product Hub Node Activated
+            {cms?.hero?.badge || 'Product Hub Node Activated'}
           </span>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6 tracking-tight">
-            Future-Proof <br/>
-            <span className="text-black">Product Disruptors</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6 tracking-tight" style={{ whiteSpace: 'pre-line' }}>
+            {cms?.hero?.headline || <>Future-Proof <br/><span className="text-black">Product Disruptors</span></>}
           </h1>
 
           <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10 font-medium">
-            We build high-performance software nodes designed for enterprise stability. Deploy disruptive kernels globally with zero-latency sync.
+            {cms?.hero?.description || 'We build high-performance software nodes designed for enterprise stability. Deploy disruptive kernels globally with zero-latency sync.'}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -357,11 +371,11 @@ const ProductsPage = () => {
             <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm mb-6 border border-indigo-50">
               <FaGoogle className="text-red-500 text-lg" />
               <span className="font-medium text-slate-700 text-sm">
-                Rated 5.0 Google Reviews
+                {cms?.reviews?.googleBadge || 'Rated 5.0 Google Reviews'}
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-              Loved by Global Partners
+              {cms?.reviews?.heading || 'Loved by Global Partners'}
             </h2>
           </div>
 
@@ -397,14 +411,14 @@ const ProductsPage = () => {
       {/* FAQ */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-16 tracking-tight">
-          Product Logs
+          {cms?.faq?.heading || 'Product Logs'}
         </h2>
         <div className="space-y-4">
-          {[
+          {(cms?.faq?.items?.length ? cms.faq.items : [
             {q: "Is Cluster Redundancy Standard?", a: "Every enterprise node comes with automated backups by default." },
             {q: "Custom AI Cluster Sync?", a: "Nodes support seamless third-party AI/ML integration." },
             {q: "Activation Cycle Window?", a: "Full activation usually takes less than 48 hours." }
-          ].map((faq, index) => (
+          ]).map((faq, index) => (
             <div key={index} className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
               <button 
                 onClick={() => setActiveAccordion(activeAccordion === index ? null : index)} 
@@ -442,7 +456,7 @@ const ProductsPage = () => {
           Request Custom Node Activation <FaArrowRight className="inline ml-3" />
         </button>
         <p className="mt-12 text-xs font-medium text-slate-300 tracking-wide">
-          © 2026 DVEIN • PRODUCT INFRASTRUCTURE
+          Â© 2026 DVEIN â¢ PRODUCT INFRASTRUCTURE
         </p>
       </div>
     </div>

@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCode, FaUserGraduate, FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useContent } from '../context/ContentContext';
 
 const WelcomeSection = () => {
+  const { content } = useContent();
+  const cms = content.welcome;
   return (
     <section className="py-24 bg-white relative overflow-hidden">
 
@@ -21,21 +24,20 @@ const WelcomeSection = () => {
               transition={{ duration: 0.8 }}
             >
               <span className="text-black font-bold tracking-widest uppercase text-sm mb-2 block">
-                Who We Are
+                {cms?.tagline || 'Who We Are'}
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 font-heading leading-tight">
-                Welcome To <span className="text-black">DVein</span> Innovations
+                {cms?.heading || <>Welcome To <span className="text-black">DVein</span> Innovations</>}
               </h2>
               <p className="text-lg text-black mb-8 leading-relaxed">
-                We are a dynamic team of passionate tech professionals and educators. We don't just build software; we build careers. Our mission is to bridge the gap between
-                <b> Industry Requirements</b> and <b>Academic Learning</b>.
+                {cms?.paragraph || "We are a dynamic team of passionate tech professionals and educators. We don't just build software; we build careers. Our mission is to bridge the gap between Industry Requirements and Academic Learning."}
               </p>
 
               <Link
-                to="/our-story"
+                to={cms?.ctaLink || '/our-story'}
                 className="inline-flex items-center gap-2 text-white bg-gray-900 hover:bg-dveinBlue px-8 py-3 rounded-lg font-medium transition-all shadow-lg hover:shadow-dveinBlue/30"
               >
-                Read Our Story <FaArrowRight />
+                {cms?.ctaText || 'Read Our Story'} <FaArrowRight />
               </Link>
             </motion.div>
           </div>
@@ -57,9 +59,9 @@ const WelcomeSection = () => {
                   <FaCode />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-black mb-2">Software Development</h3>
+                  <h3 className="text-xl font-bold text-black mb-2">{cms?.card1Title || 'Software Development'}</h3>
                   <p className="text-black text-sm leading-relaxed">
-                    Building scalable Web & Mobile applications, AI solutions, and Cloud infrastructure for modern businesses.
+                    {cms?.card1Desc || 'Building scalable Web & Mobile applications, AI solutions, and Cloud infrastructure for modern businesses.'}
                   </p>
                 </div>
               </div>
@@ -79,9 +81,9 @@ const WelcomeSection = () => {
                   <FaUserGraduate />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-black mb-2">Skill Development</h3>
+                  <h3 className="text-xl font-bold text-black mb-2">{cms?.card2Title || 'Skill Development'}</h3>
                   <p className="text-black text-sm leading-relaxed">
-                    Providing hands-on internships and industry-standard training to shape the next generation of engineers.
+                    {cms?.card2Desc || 'Providing hands-on internships and industry-standard training to shape the next generation of engineers.'}
                   </p>
                 </div>
               </div>

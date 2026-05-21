@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import { useContent } from '../context/ContentContext';
 
 // Animated canvas background with circuit-board / matrix style effect
 const TechieBackground = () => {
@@ -156,6 +157,15 @@ const storyParagraphs = [
 ];
 
 const OurStory = () => {
+  const { content } = useContent();
+  const cms = content.ourStory;
+
+  // Use CMS sections (paragraph text) if available, otherwise fall back to hardcoded storyParagraphs
+  const displayParagraphs = (cms?.sections?.length
+    ? cms.sections.map(s => s.content || s.desc || s.title || '')
+    : storyParagraphs
+  ).filter(Boolean);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden ai-gradient-bg">
 
@@ -179,17 +189,17 @@ const OurStory = () => {
           className="text-center mb-16"
         >
           <span className="inline-block py-1.5 px-5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold tracking-[0.25em] uppercase text-xs mb-6">
-            Our Origin
+            {cms?.badge || 'Our Origin'}
           </span>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-6 leading-tight tracking-tight">
-            Our <span className="text-black">Story</span>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-6 leading-tight tracking-tight" style={{ whiteSpace: 'pre-line' }}>
+            {cms?.headline || <>Our <span className="text-black">Story</span></>}
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 mx-auto rounded-full" />
         </motion.div>
 
         {/* Story paragraphs */}
         <div className="space-y-8">
-          {storyParagraphs.map((para, idx) => (
+          {displayParagraphs.map((para, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
@@ -200,7 +210,7 @@ const OurStory = () => {
                 className={`leading-relaxed font-medium ${
                   idx === 0
                     ? 'text-2xl md:text-3xl text-indigo-700 font-bold text-center'
-                    : idx === storyParagraphs.length - 1
+                    : idx === displayParagraphs.length - 1
                     ? 'text-xl md:text-2xl text-slate-900 font-extrabold text-center uppercase tracking-widest border border-indigo-100 bg-indigo-50 px-8 py-6 rounded-2xl'
                     : idx === 2
                     ? 'text-xl text-slate-700 font-bold text-center'
@@ -222,7 +232,7 @@ const OurStory = () => {
         >
           <div className="inline-flex items-center gap-3 bg-white border border-slate-100 shadow-sm px-8 py-4 rounded-full">
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-            <span className="text-slate-500 text-xs uppercase tracking-[0.3em] font-bold">DVein Innovations · Est. 2022</span>
+            <span className="text-slate-500 text-xs uppercase tracking-[0.3em] font-bold">DVein Innovations Â· Est. 2022</span>
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
           </div>
         </motion.div>

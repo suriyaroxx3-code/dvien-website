@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as FaIcons from 'react-icons/fa';
+import { useContent } from '../context/ContentContext';
 
 const getIcon = (iconName) => {
   const IconComponent = FaIcons[iconName];
@@ -63,6 +64,9 @@ const STATIC_DATA = {
 };
 
 const Training = () => {
+  const { content } = useContent();
+  const cms = content.internships;
+
   const [activeTab, setActiveTab] = useState('web');
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [data, setData] = useState(STATIC_DATA);
@@ -132,22 +136,24 @@ const Training = () => {
       <div className="relative min-h-[70vh] flex flex-col justify-center pb-12 overflow-hidden px-6">
         <div className="max-w-7xl mx-auto text-center z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-block py-1 px-3 rounded-full bg-white border border-blue-100 text-blue-600 text-xs font-bold tracking-wider mb-4 shadow-sm uppercase"></span>
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-gray-900">
-              Stop Learning Syntax. <br />
-              <span className="text-black">Start Building Projects.</span>
+            <span className="inline-block py-1 px-3 rounded-full bg-white border border-blue-100 text-blue-600 text-xs font-bold tracking-wider mb-4 shadow-sm uppercase">
+              {cms?.hero?.badge || 'Internship Program 2025'}
+            </span>
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-gray-900" style={{ whiteSpace: 'pre-line' }}>
+              {cms?.hero?.headline || <>Stop Learning Syntax. <br /><span className="text-black">Start Building Projects.</span></>}
             </h1>
             <p className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-              Join the internship program designed by IT Professionals. Mastering the tech through intense execution and real-world deployment.            </p>
+              {cms?.hero?.description || 'Join the internship program designed by IT Professionals. Mastering the tech through intense execution and real-world deployment.'}
+            </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <button
                 onClick={() => document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-3.5 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition-all"
-              >Apply Now</button>
+              >{cms?.hero?.applyBtn || 'Apply Now'}</button>
               <button
                 onClick={() => document.getElementById('domains').scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-3.5 bg-white text-gray-800 border border-gray-200 rounded-xl font-bold shadow-sm hover:bg-gray-50 transition-all"
-              >Explore Tracks</button>
+              >{cms?.hero?.exploreBtn || 'Explore Tracks'}</button>
             </div>
           </motion.div>
         </div>
@@ -168,11 +174,11 @@ const Training = () => {
       <div id="domains" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-gray-900">Choose Your Internships</h2>
-            <p className="text-gray-500 font-medium">Great courses built for high-performance careers.</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-gray-900">{cms?.domainsHeading || 'Choose Your Internships'}</h2>
+            <p className="text-gray-500 font-medium">{cms?.domainsSubheading || 'Great courses built for high-performance careers.'}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {data.domains?.map((domain, index) => (
+            {(cms?.domains?.length ? cms.domains : data.domains)?.map((domain, index) => (
               <motion.div key={domain._id} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (index % 5) * 0.08 }} className="bg-white/70 backdrop-blur-md border border-white/50 rounded-[1.5rem] p-6 hover:shadow-xl transition-all group">
                 <div className={`w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl ${domain.color} mb-6 group-hover:scale-110 transition-transform`}>{getIcon(domain.iconName)}</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{domain.title}</h3>
@@ -360,7 +366,7 @@ const Training = () => {
       {/* FAQ */}
       <div className="py-20 max-w-3xl mx-auto px-6">
         <div className="space-y-3">
-          {data.faqs?.map((faq, index) => (
+          {(cms?.faqs?.length ? cms.faqs : data.faqs)?.map((faq, index) => (
             <div key={faq._id} className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm">
               <button onClick={() => setActiveAccordion(activeAccordion === index ? null : index)} className="w-full flex justify-between items-center p-5 text-left font-bold text-sm text-gray-800">
                 {faq.question}

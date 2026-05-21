@@ -233,7 +233,141 @@ export const defaultContent = {
       whatsappNumber: "918667363896",
       whatsappMessage: "Hello DVein Team, I am interested in launching a project node."
     }
-  }
+  },
+
+  // ─── SOFTWARE SOLUTIONS PAGE ─────────────────────────────────────────────
+  softwareSolutions: {
+    hero: {
+      badge: "ENGINEERING EXCELLENCE",
+      headline: "Transforming Ideas into\nDigital Reality",
+      description: "We are a full-cycle software development company. From conceptualization to deployment, we build robust, scalable, and secure digital products.",
+      primaryBtn: "Start Your Project",
+      secondaryBtn: "Explore Services",
+    },
+    services: [
+      { _id: 1, title: "AI & Machine Learning",       desc: "Automate complex tasks with custom AI models, NLP for chatbots, and predictive analytics to forecast business trends." },
+      { _id: 2, title: "Full Stack Development",      desc: "Scalable web portals using MERN (MongoDB, Express, React, Node) or Python-Django stacks tailored for high traffic." },
+      { _id: 3, title: "Mobile App Development",      desc: "Native performance with cross-platform efficiency using Flutter & React Native. Apps that work flawlessly on iOS & Android." },
+      { _id: 4, title: "Cloud Solutions (DevOps)",    desc: "End-to-end AWS/Azure architecture, serverless deployment, Docker/Kubernetes containerization, and CI/CD pipelines." },
+      { _id: 5, title: "Data Engineering",            desc: "Transform raw data into actionable insights. Big Data processing, warehousing, and real-time visualization dashboards." },
+      { _id: 6, title: "Cybersecurity & VAPT",        desc: "Comprehensive security audits, penetration testing, and compliance setups (GDPR/ISO) to protect your digital assets." },
+    ],
+    features: [
+      { _id: 1, title: "Agile & Fast Delivery",       desc: "We use Agile methodology to deliver MVPs in weeks, not months. Regular updates ensure you are always in the loop." },
+      { _id: 2, title: "24/7 Post-Launch Support",    desc: "Our relationship doesn't end at deployment. We provide round-the-clock maintenance and bug-fixing support." },
+      { _id: 3, title: "Scalable Architecture",       desc: "We write code that grows with you. Our solutions are built to handle millions of users without breaking." },
+      { _id: 4, title: "Clean & Modern Code",         desc: "We follow industry-best coding standards, ensuring your software is secure, maintainable, and bug-free." },
+    ],
+    industries: [
+      { _id: 1, name: "EdTech",       desc: "LMS, Virtual Classrooms, Student Portals" },
+      { _id: 2, name: "Healthcare",   desc: "Telemedicine, Appointment Booking, EHR Systems" },
+      { _id: 3, name: "E-Commerce",   desc: "Multi-vendor Marketplaces, Payment Gateways" },
+      { _id: 4, name: "Real Estate",  desc: "Property Listing, VR Tours, CRM Integration" },
+    ],
+    faqs: [
+      { _id: 1, question: "How much does a custom software project cost?",  answer: "Cost depends on complexity. We offer flexible pricing models: Fixed Price for defined scopes, and Hourly for ongoing development. Contact us for a free quote." },
+      { _id: 2, question: "How long does it take to build an app?",         answer: "A simple MVP can take 4-6 weeks. Complex enterprise solutions may take 3-6 months. We provide a detailed timeline during the discovery phase." },
+      { _id: 3, question: "Do you provide source code ownership?",          answer: "Absolutely. Once the project is fully paid for, you own 100% of the source code and intellectual property." },
+    ],
+  },
+
+  // ─── COURSES PAGE ─────────────────────────────────────────────────────────
+  courses: {
+    hero: {
+      badge: "DVEIN TRAINING ACADEMY",
+      headline: "Industry-Grade Training\nFor Real-World Careers",
+      description: "Hands-on courses built by working engineers. Learn by building — not just watching.",
+      primaryBtn: "Enroll Now",
+      secondaryBtn: "Browse Courses",
+    },
+    courses: [
+      { _id: 'sc1',  title: 'Full Stack Java',              tag: 'DEV',      description: 'Master enterprise-grade Java development with Spring Boot, REST APIs, and scalable backend architecture.' },
+      { _id: 'sc2',  title: 'Full Stack Python',            tag: 'DEV',      description: 'Build end-to-end Python applications with Django, Flask, and modern frontend integration.' },
+      { _id: 'sc3',  title: 'Data Science and AI',          tag: 'AI',       description: 'Explore data pipelines, statistical modeling, and AI-driven applications using Python and real datasets.' },
+      { _id: 'sc4',  title: 'AI & Machine Learning',        tag: 'AI',       description: 'Deep dive into supervised, unsupervised, and reinforcement learning models for production deployments.' },
+      { _id: 'sc5',  title: 'Data Analytics',               tag: 'DATA',     description: 'Transform raw data into actionable insights with advanced analytics tools and visualization techniques.' },
+      { _id: 'sc6',  title: 'Business Analytics',           tag: 'BIZ',      description: 'Drive strategic decisions through data-driven business modeling, KPIs, and BI dashboards.' },
+      { _id: 'sc7',  title: 'DevOps',                       tag: 'OPS',      description: 'CI/CD pipelines, containerization, and infrastructure automation for modern software delivery.' },
+      { _id: 'sc8',  title: 'Cloud Computing',              tag: 'CLOUD',    description: 'Deploy, scale, and manage applications on AWS, Azure, and GCP with cloud-native best practices.' },
+      { _id: 'sc9',  title: 'MERN Stack',                   tag: 'DEV',      description: 'Build full-stack web apps with MongoDB, Express, React, and Node.js in a cohesive workflow.' },
+      { _id: 'sc10', title: 'UI/UX Design and Prototyping', tag: 'DESIGN',   description: 'Design intuitive user interfaces and interactive prototypes using Figma and design system principles.' },
+      { _id: 'sc11', title: 'Web Development',              tag: 'DEV',      description: 'Core and advanced web development covering HTML, CSS, JavaScript, and modern frameworks.' },
+      { _id: 'sc12', title: 'IOT',                          tag: 'HARDWARE', description: 'Connect physical devices to the internet with sensor integration, protocols, and cloud IoT platforms.' },
+      { _id: 'sc13', title: 'Embedded Systems',             tag: 'HARDWARE', description: 'Program microcontrollers, real-time systems, and low-level hardware interfaces for embedded applications.' },
+      { _id: 'sc14', title: 'Cybersecurity',                tag: 'SECURITY', description: 'Ethical hacking, threat analysis, and secure system design following OWASP and industry standards.' },
+      { _id: 'sc15', title: 'Big Data Analytics',           tag: 'DATA',     description: 'Process and analyze massive datasets using Hadoop, Spark, and distributed computing frameworks.' },
+      { _id: 'sc16', title: 'HR - Operations',              tag: 'HR',       description: 'Streamline HR workflows, talent acquisition, and workforce management with modern HR tools.' },
+      { _id: 'sc17', title: 'HR - Marketing',               tag: 'HR',       description: 'Employer branding, talent marketing strategies, and HR communication for modern organizations.' },
+      { _id: 'sc18', title: 'HR - Finance & Accounting',    tag: 'HR',       description: 'Payroll management, financial reporting, and accounting fundamentals for HR professionals.' },
+      { _id: 'sc19', title: 'Digital Marketing',            tag: 'MARKETING',description: 'SEO, social media strategy, paid advertising, and analytics for impactful digital campaigns.' },
+      { _id: 'sc20', title: 'Software Testing',             tag: 'QA',       description: 'Manual and automated testing, test case design, and QA methodologies for production software.' },
+    ],
+    features: [
+      { _id: 1, title: "Learn by Building",    desc: "Every course includes real project work—not just tutorials. You ship code from day one." },
+      { _id: 2, title: "Industry Mentors",     desc: "Courses designed and taught by working professionals with real industry experience." },
+      { _id: 3, title: "Career Support",       desc: "Resume reviews, mock interviews, and direct referrals to our hiring partner network." },
+      { _id: 4, title: "Flexible Schedule",    desc: "Weekend and weekday batches. Online and offline options available for all courses." },
+    ],
+    faqs: [
+      { _id: 1, question: "Are these courses beginner-friendly?",   answer: "Yes. Most courses start from basics and build up to advanced topics progressively." },
+      { _id: 2, question: "Will I get a certificate?",              answer: "Yes, DVein issues course completion certificates recognized by our hiring partner network." },
+      { _id: 3, question: "How do I enroll?",                       answer: "Click 'Enroll Now' on any course card or contact us via WhatsApp for instant assistance." },
+    ],
+  },
+
+  // ─── OUR STORY PAGE ───────────────────────────────────────────────────────
+  ourStory: {
+    badge: "The DVein Story",
+    headline: "Built from Passion.\nDriven by Purpose.",
+    subheadline: "We didn't start as a company. We started as a team that refused to accept the gap between education and industry.",
+    sections: [
+      { _id: 1, heading: "Where It All Began",        body: "DVein Innovations was born in 2022 in Chennai, India. A small team of engineers and educators who believed that real learning happens when you build real things." },
+      { _id: 2, heading: "The Problem We Solve",      body: "Students graduate with degrees but struggle to get jobs. Companies hire but can't find job-ready talent. We exist to fix that gap — one project, one internship, one engineer at a time." },
+      { _id: 3, heading: "Our Mission",               body: "To empower the next generation of technology professionals by combining rigorous software development with industry-standard training programs." },
+      { _id: 4, heading: "Where We Are Headed",       body: "Building a global talent ecosystem — connecting students in India with enterprises worldwide, and delivering software solutions that scale." },
+    ],
+    cta: { text: "Work With Us", link: "/contact" },
+  },
+
+  // ─── COLLABORATIONS PAGE ──────────────────────────────────────────────────
+  collaborations: {
+    hero: {
+      badge: "GLOBAL PARTNERSHIP NETWORK",
+      headline: "Building Tomorrow's\nTech Ecosystem Together",
+      description: "We partner with enterprises, startups, and research institutions worldwide to co-create technology that scales.",
+      primaryBtn: "Start a Collaboration",
+    },
+    metrics: [
+      { _id: 1, label: "Enterprise Partners",       count: "45+" },
+      { _id: 2, label: "Countries Served",          count: "12+" },
+      { _id: 3, label: "Joint Projects Delivered",  count: "150+" },
+      { _id: 4, label: "Uptime SLA",                count: "99.9%" },
+    ],
+    tiers: [
+      { _id: 1, title: "Strategic Enterprise Alliance", desc: "A long-term partnership model designed for multinational enterprises seeking a reliable offshore technology backbone. We deliver dedicated development clusters, secure cloud infrastructure, and SLA-driven performance monitoring.", features: ["Dedicated Engineering Pods", "SLA-Backed Infrastructure", "Cross-Border Compliance", "Enterprise Support Desk"] },
+      { _id: 2, title: "R&D Innovation Partnership",    desc: "A co-innovation framework for startups, labs, and product companies to jointly build next-gen solutions across IoT, Smart Manufacturing, AI, and Blockchain ecosystems.", features: ["Joint IP Ownership Models", "Rapid Prototyping Labs", "Secure Data Sandboxes", "Product Commercialization Support"] },
+      { _id: 3, title: "Global Talent Synergy",         desc: "A talent bridge connecting verified student innovators and industry-ready engineers with international firms for project outsourcing, hiring pipelines, and digital transformation initiatives.", features: ["Vetted Developer Network", "Quality Assurance Gates", "Structured Onboarding", "Global Talent Pipelines"] },
+    ],
+    faqs: [
+      { _id: 1, question: "What types of organisations do you collaborate with?",     answer: "We work with startups, SMEs, and enterprise companies across Tech, Manufacturing, Healthcare, and Education verticals." },
+      { _id: 2, question: "Is there a minimum engagement duration for partnerships?", answer: "Our Strategic Alliance model requires a minimum 6-month commitment. R&D and Talent Synergy programs can start with a 3-month pilot." },
+      { _id: 3, question: "How do we get started?",                                   answer: "Reach out via WhatsApp or the contact form. Our partnerships team will schedule a discovery call within 48 hours." },
+    ],
+  },
+
+  // ─── CONTACT PAGE ─────────────────────────────────────────────────────────
+  contact: {
+    badge: "GET IN TOUCH",
+    headline: "Let's Build Something\nAmazing Together",
+    description: "Whether you have a project in mind, want to collaborate, or just want to say hello — we'd love to hear from you.",
+    address: "Alpha City IT Park, No.25, OMR,\nNavalur, Chennai – 600130",
+    phone: "+91 95001 81230",
+    email: "info@dveininnovations.com",
+    hours: "Mon – Sat: 9 AM – 7 PM IST",
+    formHeading: "Send Us a Message",
+    formSubheading: "Fill in the form and we'll get back to you within 24 hours.",
+    submitBtn: "Send Message",
+  },
 };
 
 // ─── CONTEXT ──────────────────────────────────────────────────────────────────
@@ -250,17 +384,23 @@ export const ContentProvider = ({ children }) => {
         if (Array.isArray(defaultContent[key])) return p[key];
         return { ...defaultContent[key], ...p[key] };
       };
+      const deepMerge = (key) => p[key] ? { ...defaultContent[key], ...p[key] } : defaultContent[key];
       return {
-        hero:            { slides: p.hero?.slides || defaultContent.hero.slides },
-        welcome:         merge('welcome'),
-        stats:           p.stats || defaultContent.stats,
-        howWeDo:         { ...merge('howWeDo'), steps: p.howWeDo?.steps || defaultContent.howWeDo.steps },
-        whyChooseUs:     { ...merge('whyChooseUs'), features: p.whyChooseUs?.features || defaultContent.whyChooseUs.features },
-        testimonials:    { ...merge('testimonials'), reviews: p.testimonials?.reviews || defaultContent.testimonials.reviews },
-        footer:          merge('footer'),
-        internships:     p.internships     ? { ...defaultContent.internships,     ...p.internships     } : defaultContent.internships,
-        products:        p.products        ? { ...defaultContent.products,        ...p.products        } : defaultContent.products,
-        studentProjects: p.studentProjects ? { ...defaultContent.studentProjects, ...p.studentProjects } : defaultContent.studentProjects,
+        hero:              { slides: p.hero?.slides || defaultContent.hero.slides },
+        welcome:           merge('welcome'),
+        stats:             p.stats || defaultContent.stats,
+        howWeDo:           { ...merge('howWeDo'), steps: p.howWeDo?.steps || defaultContent.howWeDo.steps },
+        whyChooseUs:       { ...merge('whyChooseUs'), features: p.whyChooseUs?.features || defaultContent.whyChooseUs.features },
+        testimonials:      { ...merge('testimonials'), reviews: p.testimonials?.reviews || defaultContent.testimonials.reviews },
+        footer:            merge('footer'),
+        internships:       p.internships       ? { ...defaultContent.internships,       ...p.internships       } : defaultContent.internships,
+        products:          p.products          ? { ...defaultContent.products,          ...p.products          } : defaultContent.products,
+        studentProjects:   p.studentProjects   ? { ...defaultContent.studentProjects,   ...p.studentProjects   } : defaultContent.studentProjects,
+        softwareSolutions: p.softwareSolutions ? { ...defaultContent.softwareSolutions, ...p.softwareSolutions } : defaultContent.softwareSolutions,
+        courses:           p.courses           ? { ...defaultContent.courses,           ...p.courses           } : defaultContent.courses,
+        ourStory:          p.ourStory          ? { ...defaultContent.ourStory,          ...p.ourStory          } : defaultContent.ourStory,
+        collaborations:    p.collaborations    ? { ...defaultContent.collaborations,    ...p.collaborations    } : defaultContent.collaborations,
+        contact:           merge('contact'),
       };
     } catch { return defaultContent; }
   });

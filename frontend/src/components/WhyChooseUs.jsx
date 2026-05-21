@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLightbulb, FaChalkboardTeacher, FaUsers, FaHandHoldingUsd } from 'react-icons/fa';
+import { useContent } from '../context/ContentContext';
 
-const features = [
+const staticFeatures = [
   { name: 'Innovative Approach', desc: 'We believe in learning by doing and delivering value through every line of code.', icon: FaLightbulb, color: 'text-yellow-500', bg: 'bg-yellow-50' },
   { name: 'Industry-Relevant Training', desc: 'Curriculum designed by experts to meet current market demands.', icon: FaChalkboardTeacher, color: 'text-blue-600', bg: 'bg-blue-50' },
   { name: 'Student & Client-Focused', desc: 'Dedicated support for both business growth and student career development.', icon: FaUsers, color: 'text-green-600', bg: 'bg-green-50' },
@@ -10,16 +11,24 @@ const features = [
 ];
 
 const WhyChooseUs = () => {
+  const { content } = useContent();
+  const cms = content.whyChooseUs;
+  const features = staticFeatures.map((f, i) => ({
+    ...f,
+    name: cms?.features?.[i]?.name ?? f.name,
+    desc: cms?.features?.[i]?.desc ?? f.desc,
+  }));
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 font-heading">
-            Why Choose <span className="text-black">DVein?</span>
+            {cms?.heading || <>Why Choose <span className="text-black">DVein?</span></>}
           </h2>
           <p className="text-lg text-black max-w-2xl mx-auto">
-            Our journey has just begun, and we're excited to grow alongside our clients and learners.
+            {cms?.subheading || "Our journey has just begun, and we're excited to grow alongside our clients and learners."}
           </p>
         </div>
 

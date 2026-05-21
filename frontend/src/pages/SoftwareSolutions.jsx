@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useContent } from '../context/ContentContext';
 import ImageSlideshow from '../components/ImageSlideshow';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -58,6 +59,18 @@ const openWA_SS = (msg = 'Hello DVein Team, I am interested in your Software Sol
 
 const SoftwareSolutions = () => {
   const [activeAccordion, setActiveAccordion] = useState(null);
+  const { content } = useContent();
+  const cms = content.softwareSolutions;
+
+  // Merge CMS text over static data — icons stay hardcoded
+  const cmsServices = cms?.services?.length ? cms.services : servicesList.map(s => ({ title: s.title, desc: s.desc }));
+  const displayServices = servicesList.map((s, i) => ({ ...s, title: cmsServices[i]?.title ?? s.title, desc: cmsServices[i]?.desc ?? s.desc }));
+  const cmsFeatures = cms?.features?.length ? cms.features : features.map(f => ({ title: f.title, desc: f.desc }));
+  const displayFeatures = features.map((f, i) => ({ ...f, title: cmsFeatures[i]?.title ?? f.title, desc: cmsFeatures[i]?.desc ?? f.desc }));
+  const cmsIndustries = cms?.industries?.length ? cms.industries : industries.map(ind => ({ name: ind.name, desc: ind.desc }));
+  const displayIndustries = industries.map((ind, i) => ({ ...ind, name: cmsIndustries[i]?.name ?? ind.name, desc: cmsIndustries[i]?.desc ?? ind.desc }));
+  const cmsFaqs = cms?.faqs?.length ? cms.faqs : faqs.map(f => ({ question: f.question, answer: f.answer }));
+  const displayFaqs = faqs.map((f, i) => ({ ...f, question: cmsFaqs[i]?.question ?? f.question, answer: cmsFaqs[i]?.answer ?? f.answer }));
 
   return (
     <div className="ss-page font-sans text-gray-900 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen pt-24 pb-16">
@@ -66,14 +79,13 @@ const SoftwareSolutions = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <span className="inline-block py-1.5 px-4 rounded-full bg-indigo-50 text-indigo-600 font-extrabold tracking-widest uppercase text-[10px] mb-8 border border-indigo-100">
-            ENGINEERING EXCELLENCE
+            {cms?.hero?.badge || 'ENGINEERING EXCELLENCE'}
           </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-black font-heading mb-6 leading-tight">
-            Transforming Ideas into <br/>
-            <span className="text-black">Digital Reality</span>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-black font-heading mb-6 leading-tight" style={{ whiteSpace: 'pre-line' }}>
+            {cms?.hero?.headline ? cms.hero.headline.replace(/\\n/g, '\n') : 'Transforming Ideas into\nDigital Reality'}
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            We are a full-cycle software development company. From conceptualization to deployment, we build robust, scalable, and secure digital products.
+            {cms?.hero?.description || 'We are a full-cycle software development company. From conceptualization to deployment, we build robust, scalable, and secure digital products.'}
           </p>
           <div className="flex justify-center gap-4">
             <button
@@ -92,7 +104,7 @@ const SoftwareSolutions = () => {
       {/* === WHY CHOOSE US === */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, i) => (
+          {displayFeatures.map((feature, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -129,7 +141,7 @@ const SoftwareSolutions = () => {
           <p className="text-gray-600 max-w-2xl mx-auto">We leverage cutting-edge technology to solve complex challenges.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesList.map((service, index) => (
+          {displayServices.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -246,7 +258,7 @@ const SoftwareSolutions = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <h2 className="text-3xl font-bold text-center text-black mb-10">Frequently Asked Questions</h2>
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
+          {displayFaqs.map((faq, index) => (
             <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
               <button
                 onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}

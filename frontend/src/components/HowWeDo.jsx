@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaSearch, FaPencilRuler, FaCode, FaRocket } from 'react-icons/fa';
+import { useContent } from '../context/ContentContext';
 
-const steps = [
+const staticSteps = [
   { id: '01', title: 'Discovery',   icon: <FaSearch />,      desc: 'We analyze your requirements and brainstorm the best technical approach.',   color: 'bg-indigo-600' },
   { id: '02', title: 'Design',      icon: <FaPencilRuler />, desc: 'Creating intuitive UI/UX prototypes that align with your brand identity.',   color: 'bg-violet-600' },
   { id: '03', title: 'Development', icon: <FaCode />,        desc: 'Our experts build robust, scalable solutions using cutting-edge technology.', color: 'bg-blue-600'   },
@@ -10,6 +11,14 @@ const steps = [
 ];
 
 const HowWeDo = () => {
+  const { content } = useContent();
+  const cms = content.howWeDo;
+  const steps = staticSteps.map((s, i) => ({
+    ...s,
+    title: cms?.steps?.[i]?.title ?? s.title,
+    desc:  cms?.steps?.[i]?.desc  ?? s.desc,
+  }));
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -26,10 +35,10 @@ const HowWeDo = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block py-1 px-4 rounded-full bg-white/10 text-white/70 text-xs font-semibold tracking-widest uppercase mb-4">
-            Our Process
+            {cms?.tagline || 'Our Process'}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            How We Make It Happen
+            {cms?.heading || 'How We Make It Happen'}
           </h2>
         </motion.div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useContent } from '../context/ContentContext';
 import { motion } from 'framer-motion';
 import { 
   FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaLinkedinIn, 
@@ -8,6 +9,8 @@ import {
 const WA_OTHER = '918667363896';
 
 const Contact = () => {
+  const { content } = useContent();
+  const cms = content.contact;
   const [formState, setFormState] = useState({ name: '', email: '', service: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null | 'success' | 'error'
@@ -84,16 +87,17 @@ const Contact = () => {
           className="text-center mb-20"
         >
           <span className="inline-block py-1 px-4 rounded-full bg-white border border-gray-200 text-dveinBlue text-xs font-bold tracking-[0.2em] uppercase mb-6 shadow-sm">
-            Available for New Projects
+            {cms?.badge || 'Available for New Projects'}
           </span>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-6">
-            Let’s Build the <br className="hidden md:block"/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-dveinBlue via-blue-500 to-dveinGreen">
-              Future Together
-            </span>
+          <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-6" style={{ whiteSpace: 'pre-line' }}>
+            {cms?.headline
+              ? cms.headline.replace(/\\n/g, '\n')
+              : <>Let's Build the <br className="hidden md:block"/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-dveinBlue via-blue-500 to-dveinGreen">Future Together</span></>
+            }
           </h1>
           <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Whether you have a groundbreaking idea or need technical expertise, we are here to turn your vision into reality.
+            {cms?.description || 'Whether you have a groundbreaking idea or need technical expertise, we are here to turn your vision into reality.'}
           </p>
         </motion.div>
 
@@ -111,8 +115,8 @@ const Contact = () => {
              </div>
              <h3 className="text-2xl font-bold text-gray-900 mb-2">Talk to Sales</h3>
              <p className="text-gray-500 mb-6 text-sm">Interested in our services? Just pick up the phone to chat with a member of our sales team.</p>
-             <a href="tel:+919500181230" className="text-lg font-bold text-dveinBlue hover:underline flex items-center gap-2">
-                +91 95001 81230 <FaArrowRight className="text-sm"/>
+             <a href={`tel:${(cms?.phone || '+919500181230').replace(/\s/g, '')}`} className="text-lg font-bold text-dveinBlue hover:underline flex items-center gap-2">
+                {cms?.phone || '+91 95001 81230'} <FaArrowRight className="text-sm"/>
              </a>
           </motion.div>
 
@@ -122,9 +126,9 @@ const Contact = () => {
                 <FaEnvelope />
              </div>
              <h3 className="text-2xl font-bold text-gray-900 mb-2">Email Support</h3>
-             <p className="text-gray-500 mb-6 text-sm">Sometimes you need a little help from your friends. Or a support rep. Don’t worry… we’re here for you.</p>
-             <a href="mailto:info@dveininnovations.com" className="text-lg font-bold text-dveinGreen hover:underline flex items-center gap-2">
-                info@dveininnovations.com <FaArrowRight className="text-sm"/>
+             <p className="text-gray-500 mb-6 text-sm">Sometimes you need a little help from your friends. Or a support rep. Don't worry… we're here for you.</p>
+             <a href={`mailto:${cms?.email || 'info@dveininnovations.com'}`} className="text-lg font-bold text-dveinGreen hover:underline flex items-center gap-2">
+                {cms?.email || 'info@dveininnovations.com'} <FaArrowRight className="text-sm"/>
              </a>
           </motion.div>
 
@@ -134,7 +138,7 @@ const Contact = () => {
                 <FaMapMarkerAlt />
              </div>
              <h3 className="text-2xl font-bold text-gray-900 mb-2">Visit HQ</h3>
-             <p className="text-gray-500 mb-6 text-sm">Alpha City IT Park, No.25, OMR, Navalur, Chennai – 600 130.</p>
+             <p className="text-gray-500 mb-6 text-sm">{cms?.address || 'Alpha City IT Park, No.25, OMR, Navalur, Chennai – 600 130.'}</p>
              <a href="https://maps.google.com" target="_blank" className="text-lg font-bold text-blue-600 hover:underline flex items-center gap-2">
                 Get Directions <FaArrowRight className="text-sm"/>
              </a>
@@ -154,8 +158,8 @@ const Contact = () => {
           >
              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-dveinBlue to-dveinGreen"></div>
              
-             <h2 className="text-3xl font-bold text-gray-900 mb-2">Send us a Message</h2>
-             <p className="text-gray-500 mb-8">We usually respond within 2 hours.</p>
+             <h2 className="text-3xl font-bold text-gray-900 mb-2">{cms?.formHeading || 'Send us a Message'}</h2>
+             <p className="text-gray-500 mb-8">{cms?.formSubheading || 'We usually respond within 2 hours.'}</p>
 
              {/* Success message */}
              {submitStatus === 'success' && (
@@ -255,7 +259,7 @@ const Contact = () => {
                       Sending…
                     </>
                   ) : (
-                    <>Send Message <FaArrowRight /></>
+                    <>{cms?.submitBtn || 'Send Message'} <FaArrowRight /></>
                   )}
                 </button>
              </form>
@@ -305,7 +309,7 @@ const Contact = () => {
       </div>
 
       <footer className="py-12 text-center border-t border-gray-100 bg-white">
-        <p className="text-xs text-gray-400">© 2026 DVein Innovations · All Rights Reserved</p>
+        <p className="text-xs text-gray-400">Â© 2026 DVein Innovations Â· All Rights Reserved</p>
       </footer>
     </div>
   );

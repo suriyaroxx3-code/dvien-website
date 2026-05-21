@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useContent } from '../context/ContentContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
@@ -34,6 +35,8 @@ const staticCourses = [
 ];
 
 const AcademyPage = () => {
+  const { content } = useContent();
+  const cms = content.courses;
   const [trainings, setTrainings] = useState([]);
   const [activeAccordion, setActiveAccordion] = useState(null);
 
@@ -95,18 +98,36 @@ const AcademyPage = () => {
       .catch(err => console.error(err));
   }, []);
 
-  const features = [
+  // CMS-aware data — falls back to hardcoded defaults if not set
+  const staticFeatures = [
     { icon: <FaBolt />, title: "PR-Driven Learning", desc: "Real production workflows with architectural feedback from senior engineers." },
     { icon: <FaShieldAlt />, title: "Security First", desc: "OWASP standards and secure database architecture from day one." },
     { icon: <FaUsers />, title: "Collective Sync", desc: "Daily collaboration with high-performance engineering teams." },
     { icon: <FaChartLine />, title: "Growth Maps", desc: "Structured career tracks to accelerate seniority." },
   ];
+  const cmsFeatures = cms?.features?.length ? cms.features : null;
+  const features = staticFeatures.map((f, i) => ({
+    ...f,
+    title: cmsFeatures?.[i]?.title ?? f.title,
+    desc:  cmsFeatures?.[i]?.desc  ?? f.desc,
+  }));
 
-  const faqs = [
+  const staticFaqs = [
     { question: "Is this for absolute beginners?", answer: "We start with fundamentals and scale into real engineering workflows." },
     { question: "Do I get to work on real projects?", answer: "Top performers join live production builds and client simulations." },
     { question: "What about certificate validation?", answer: "All certifications are ledger-verified and globally shareable." },
   ];
+  const cmsFaqs = cms?.faqs?.length ? cms.faqs : null;
+  const faqs = staticFaqs.map((f, i) => ({
+    question: cmsFaqs?.[i]?.question ?? f.question,
+    answer:   cmsFaqs?.[i]?.answer   ?? f.answer,
+  }));
+
+  // CMS courses merged with static icon/color metadata
+  const displayCourses = staticCourses.map((sc, i) => {
+    const cmsC = cms?.courses?.[i];
+    return { ...sc, title: cmsC?.title ?? sc.title, description: cmsC?.description ?? sc.description, tag: cmsC?.tag ?? sc.tag };
+  });
 
   return (
     <div className="font-sans text-slate-900 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen pt-24 pb-16">
@@ -115,17 +136,15 @@ const AcademyPage = () => {
       <section className="max-w-7xl mx-auto px-6 pt-10 pb-20 text-center">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <span className="inline-block py-1.5 px-4 rounded-full bg-indigo-50 text-indigo-600 font-extrabold tracking-widest uppercase text-[10px] mb-8 border border-indigo-100">
-            Academy Hub
+            {cms?.hero?.badge || 'Academy Hub'}
           </span>
 
-          <h1 className="text-4xl md:text-6xl font-semibold text-slate-900 leading-tight mb-6 tracking-tight">
-            Master the <br />
-            <span className="text-black">Engineering Stack</span>
+          <h1 className="text-4xl md:text-6xl font-semibold text-slate-900 leading-tight mb-6 tracking-tight" style={{ whiteSpace: 'pre-line' }}>
+            {cms?.hero?.headline ? cms.hero.headline.replace(/\\n/g, '\n') : 'Master the\nEngineering Stack'}
           </h1>
 
           <p className="max-w-3xl mx-auto text-base text-slate-600 leading-relaxed font-medium mb-10">
-            Beyond syntax, we focus on engineering scalability. DVein Academy transforms learners into
-            industry-ready engineers through production-grade simulation.
+            {cms?.hero?.description || 'Beyond syntax, we focus on engineering scalability. DVein Academy transforms learners into industry-ready engineers through production-grade simulation.'}
           </p>
 
           <div className="flex justify-center gap-4">
@@ -189,54 +208,36 @@ const AcademyPage = () => {
   </div>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    {trainings.map((course) => (
+    {/* Show CMS-editable static courses; fall back to backend trainings if CMS list is empty */}
+    {(displayCourses.length > 0 ? displayCourses : trainings).map((course) => (
       <motion.div
         key={course._id}
         whileHover={{ y: -4 }}
         transition={{ duration: 0.25 }}
-        className="
-          bg-white
-          border border-slate-200
-          rounded-xl
-          shadow-sm hover:shadow-md
-          overflow-hidden
-          flex flex-col
-        "
+        className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md overflow-hidden flex flex-col"
       >
-        {/* Image */}
-        <div className="relative h-44 overflow-hidden bg-slate-100">
-          <img
-            src={course.image || "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"}
-            className="w-full h-full object-cover"
-            alt=""
-          />
-
-          {/* Badge */}
-          <div className="absolute top-3 left-3 bg-slate-900 text-white px-3 py-1 rounded-md text-[11px] font-medium">
-            {course.tag || "PRO"}
+        {/* Gradient header with icon */}
+        <div className={`relative h-36 flex items-center justify-center bg-gradient-to-br ${course.color || 'from-indigo-600 to-indigo-800'}`}>
+          <div className="text-white text-4xl opacity-80">{course.icon}</div>
+          <div className="absolute top-3 left-3 bg-black/30 text-white px-3 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider">
+            {course.tag || 'PRO'}
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6 flex flex-col h-full">
-          <h3 className="text-lg font-semibold text-slate-900 mb-1">
-            {course.title}
-          </h3>
-
-          <p className="text-sm text-slate-600 leading-relaxed mb-4">
-            {course.description ||
-              "Production-grade program focused on real-world engineering practices, scalable systems, and collaborative workflows."}
+        <div className="p-6 flex flex-col flex-1">
+          <h3 className="text-base font-bold text-slate-900 mb-2">{course.title}</h3>
+          <p className="text-sm text-slate-500 leading-relaxed mb-4 flex-1">
+            {course.description || 'Production-grade program focused on real-world engineering practices and collaborative workflows.'}
           </p>
-
-          <div className="flex items-center gap-2 text-indigo-600 text-sm font-medium mt-auto">
+          <div className="flex items-center gap-2 text-indigo-600 text-xs font-semibold mb-3">
             <FaCheckCircle className="text-indigo-500" /> Active Program
           </div>
-
           <button
             onClick={() => openEnroll(course.title)}
-            className="w-full mt-4 py-2.5 bg-indigo-600 text-white rounded-lg font-medium text-sm hover:bg-indigo-700 transition block text-center"
+            className="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-medium text-sm hover:bg-indigo-700 transition text-center"
           >
-            Enroll Now
+            {cms?.hero?.primaryBtn || 'Enroll Now'}
           </button>
         </div>
       </motion.div>

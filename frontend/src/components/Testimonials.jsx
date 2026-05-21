@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { useContent } from '../context/ContentContext';
 
-const reviews = [
+const defaultReviews = [
   { id: 1, name: "Sriram K.", role: "Data Science Intern", text: "The internship gave me practical exposure to real datasets. I contributed to an actual AI project, not just dummy tasks.", rating: 5 },
   { id: 2, name: "Divya R.", role: "Client - E-commerce", text: "DVein team delivered our mobile app way ahead of schedule. The UI is stunning and exactly what we envisioned.", rating: 5 },
   { id: 3, name: "Arun Vijay", role: "Full Stack Student", text: "Best place to learn MERN stack. Mentors are working professionals, teaching industry standards.", rating: 5 },
@@ -15,6 +16,10 @@ const reviews = [
 ];
 
 const Testimonials = () => {
+  const { content } = useContent();
+  const cms = content.testimonials;
+  const reviews = (cms?.reviews?.length ? cms.reviews : defaultReviews);
+
   return (
     <section className="py-20 ai-gradient-bg relative overflow-hidden">
       
@@ -22,9 +27,9 @@ const Testimonials = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2 rounded-full shadow-sm mb-4 border border-white/50 cursor-pointer">
             <FaGoogle className="text-red-500 text-xl" />
-            <span className="font-bold text-black">Rated 5.0 on Google Reviews</span>
+            <span className="font-bold text-black">{cms?.googleRating || 'Rated 5.0 on Google Reviews'}</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-black font-heading">Loved by Clients & Students</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-black font-heading">{cms?.heading || 'Loved by Clients & Students'}</h2>
         </div>
 
         <Swiper
@@ -55,6 +60,7 @@ const Testimonials = () => {
                     {review.name.charAt(0)}
                   </div>
                   <div>
+                    <h4 className="font-bold text-black text-base font-heading">{review.name}</h4>
                     <h4 className="font-bold text-black text-base font-heading">{review.name}</h4>
                     <p className="text-xs text-black font-medium">{review.role}</p>
                   </div>
