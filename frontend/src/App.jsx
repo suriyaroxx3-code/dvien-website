@@ -17,36 +17,21 @@ import Collaborations from './pages/Collaborations';
 import OurStory from './pages/OurStory';
 import Privacy from './pages/Privacy';
 
-// USER AUTH
-import Login from './pages/Login';
-import Register from './pages/Register';
-import UserDashboard from './pages/UserDashboard';
-
-// ADMIN
-import AdminLogin from './pages/Admin/AdminLogin';
-import Dashboard from './pages/Admin/Dashboard';
-import CMSPanel from './pages/Admin/CMSPanel';
-
 // FOOTER & WHATSAPP
 import Footer from './components/Footer';
 import WhatsAppBtn from './components/common/WhatsAppBtn';
 
-// CMS CONTEXT
-import { ContentProvider } from './context/ContentContext';
-
 const Layout = () => {
   const location = useLocation();
 
-  const isHomePage    = location.pathname === '/';
-  const isAdminPage   = location.pathname.startsWith('/admin');
+  const isHomePage = location.pathname === '/';
   const isOurStoryPage = location.pathname === '/our-story';
 
   return (
     <>
       <ScrollToTop />
 
-      {/* Navbar: hide on Home, Admin & Our Story pages */}
-      {!isHomePage && !isAdminPage && !isOurStoryPage && <Navbar />}
+      {!isHomePage && !isOurStoryPage && <Navbar />}
 
       <Routes>
         {/* PUBLIC ROUTES */}
@@ -62,24 +47,16 @@ const Layout = () => {
         <Route path="/our-story"         element={<OurStory />} />
         <Route path="/privacy"           element={<Privacy />} />
 
-        {/* USER AUTH ROUTES */}
-        <Route path="/login"             element={<Login />} />
-        <Route path="/register"          element={<Register />} />
-        <Route path="/user-dashboard"    element={<UserDashboard />} />
-
-        {/* ADMIN ROUTES */}
-        <Route path="/admin/login"       element={<AdminLogin />} />
-        <Route path="/admin/dashboard"   element={<Dashboard />} />
-        <Route path="/admin-dashboard"   element={<Dashboard />} />
-        <Route path="/admin/cms"         element={<CMSPanel />} />
-
-        {/* 404 */}
-        <Route path="*"                  element={<NotFound />} />
+        {/* 404 PAGE */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {/* Footer & WhatsApp: hide on Home (has its own), Admin & Our Story pages */}
-      {!isHomePage && !isAdminPage && !isOurStoryPage && <Footer />}
-      {!isHomePage && !isAdminPage && <WhatsAppBtn />}
+      {!isHomePage && !isOurStoryPage && (
+        <>
+          <Footer />
+          <WhatsAppBtn />
+        </>
+      )}
     </>
   );
 };

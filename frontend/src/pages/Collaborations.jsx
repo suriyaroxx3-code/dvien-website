@@ -16,7 +16,7 @@ const Collaborations = () => {
 
   const handleCollaborate = () => {
     window.open(
-      "https://wa.me/918667363896?text=Hello%20DVein%20Team,%20I%20am%20interested%20in%20a%20global%20collaboration.",
+      "https://wa.me/919500181230?text=Hello%20DVein%20Team,%20I%20am%20interested%20in%20a%20global%20collaboration.",
       "_blank"
     );
   };
@@ -259,15 +259,11 @@ const Collaborations = () => {
           <FaWhatsapp className="text-lg" /> Contact DVein Partnerships
         </button>
       </section>
-
-      <footer className="py-10 text-center border-t border-slate-100 bg-white/70">
-        <p className="text-xs text-slate-400">
-          © 2026 DVein Innovations · Global Partnerships Division
-        </p>
+      <footer className="py-10 text-center border-t border-slate-100">
+        <p className="text-xs text-slate-400">© 2026 DVein Innovations · Collaborations</p>
       </footer>
-
     </div>
   );
 };
 
-export default Collaborations;
+export default Collabora

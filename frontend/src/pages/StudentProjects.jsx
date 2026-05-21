@@ -6,7 +6,7 @@ import {
   FaSatellite, FaBolt, FaMemory, FaRocket
 } from 'react-icons/fa';
 import AnimatedRoadmap from '../components/AnimatedRoadmap';
-import { useContent } from '../context/ContentContext';
+import ImageSlideshow from '../components/ImageSlideshow';
 
 // Visual constants — icons & colors stay fixed
 const STAT_ICONS    = [<FaMicrochip />, <FaCode />, <FaSatellite />, <FaLightbulb />];
@@ -14,13 +14,181 @@ const ROADMAP_ICONS  = [<FaLightbulb />, <FaProjectDiagram />, <FaTools />, <FaG
 const ROADMAP_COLORS = ['bg-indigo-500', 'bg-violet-600', 'bg-blue-600', 'bg-cyan-600'];
 
 const StudentProjects = () => {
-  const { content } = useContent();
-  const sp = content.studentProjects;
+  const [isSyncing, setIsSyncing] = useState(true);
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  const heroLines = sp.hero.headline.split('\\n');
-  const ctaLines  = sp.cta.heading.split('\\n');
-  const hwLines   = sp.hardware.heading.split('\\n');
-  const waLink    = `https://wa.me/${sp.cta.whatsappNumber}?text=${encodeURIComponent(sp.cta.whatsappMessage)}`;
+  const nodeFilters = [
+    { label: 'All Nodes',      value: 'all' },
+    { label: 'Software Node',  value: 'software' },
+    { label: 'Hardware Node',  value: 'hardware' },
+    { label: 'Embedded Node',  value: 'embedded' },
+  ];
+
+  useEffect(() => {
+    // Initializing high-performance logic nodes
+    const timer = setTimeout(() => setIsSyncing(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // --- 1. PERFORMANCE METRICS (Compact Enterprise Layout) ---
+  const projectStats = [
+    { label: "Hardware Nodes", count: "250+", icon: <FaMicrochip /> },
+    { label: "Software Clusters", count: "190+", icon: <FaCode /> },
+    { label: "IoT Mesh Systems", count: "110+", icon: <FaSatellite /> },
+    { label: "Patent Drafts", count: "30+", icon: <FaLightbulb /> }
+  ];
+
+  // --- 2. MASSIVE CONTENT: WHY DVEIN FOR PROJECTS (500+ Line Depth) ---
+  const whyBestFeatures = [
+    {
+      t: "Industrial Component Inventory",
+      d: "Access production-grade hardware nodes like ESP32-S3, STM32 Nucleo, and industrial sensors. Build with actual hardware used in factories."
+    },
+    {
+      t: "Enterprise Full-Stack Integration",
+      d: "Our unique methodology focuses on connecting physical hardware to massive cloud clusters using MERN stack and MQTT protocols for real-time telemetry."
+    },
+    {
+      t: "Production-Grade Prototyping",
+      d: "Beyond breadboards. We guide students through professional PCB design, custom 3D enclosures, and industrial wiring standards for market-ready products."
+    },
+    {
+      t: "Secure Deployment Logic",
+      d: "Every software node is built with MVC architecture, JWT-based security sync, and scalable database management."
+    },
+    {
+      t: "IP & Patent Mentorship",
+      d: "Innovative projects are mentored for potential patent drafting, ensuring your intellectual property meets industrial standards for global commercialization."
+    },
+    {
+      t: "Hybrid System Architecture",
+      d: "Learn to architect complex systems that involve seamless cross-platform communication between mobile apps, web dashboards, and embedded nodes."
+    }
+  ];
+
+  // --- 3. REPOSITORY DATA (Integrated Multi-Domain Projects) ---
+  const projects = [
+    {
+      id: 1,
+      category: 'software',
+      title: "AI based Smart Medicine Remainder Android Application",
+      student: "Software Development Batch",
+      desc: "•Smart Reminders • Medicine Tracking • Missed Dose Alerts • Caregiver Notifications • Health Dashboard",
+      tools: [ "React Native","FastAPI","PostgreSQL","Twilio API","Expo Notifications" ],
+      images: [
+        "/project-images/ai-medicine/img1.jpg",
+        "/project-images/ai-medicine/img2.jpg",
+        "/project-images/ai-medicine/img3.jpg",
+        "/project-images/ai-medicine/img4.jpg",
+        "/project-images/ai-medicine/img5.jpg",
+        "/project-images/ai-medicine/img6.jpg",
+        "/project-images/ai-medicine/img7.jpg",
+        "/project-images/ai-medicine/img8.jpg",
+        "/project-images/ai-medicine/img9.jpg",
+      ]
+    },
+    {
+      id: 2,
+      category: 'hardware',
+      title: "Crowd Safety Application based on Real Time Metro Station Monitoring",
+      student: "Hardware & IoT Batch",
+      desc: "•Live Crowd Detection • Real-Time Alerts  •Safety Threshold Monitoring •SMS Notifications •Analytics Dashboard •Automated Emergency Indications",
+      tools: ["Arduino Uno","I2C LCD Display","Buzzer","LED Indicators","Camera Module","React Native","FastAPI","OpenCV","Twilio API","Arduino IDE","Serial Communication"],
+      images: [
+        "/project-images/crowd-safety/img1.jpg",
+        "/project-images/crowd-safety/img2.jpg",
+        "/project-images/crowd-safety/img3.jpg",
+        "/project-images/crowd-safety/img4.jpg",
+        "/project-images/crowd-safety/img5.jpg",
+        "/project-images/crowd-safety/img6.jpg",
+        "/project-images/crowd-safety/img7.jpg",
+        "/project-images/crowd-safety/img8.jpg",
+      ]
+    },
+    {
+      id: 3,
+      category: 'embedded',
+      title: "Smart Ring Application for Health Monitoring",
+      student: "Embedded Systems Batch",
+      desc: "•Yoga Posture Tracking • Activity Monitoring • Breathing Analysis • Real-Time Health Insights • Smart Notifications • Progress Analytics",
+      tools: ["Smart Sensor Ring", "Motion Sensors", "Bluetooth Module", "Health Monitoring Sensors", "React Native", "FastAPI", "Python", "IoT Sensors", "Bluetooth Communication", "Cloud Analytics"],
+      images: [
+        "/project-images/smart-ring/img1.jpg",
+        "/project-images/smart-ring/img2.jpg",
+        "/project-images/smart-ring/img3.jpg",
+        "/project-images/smart-ring/img4.jpg",
+        "/project-images/smart-ring/img5.jpg",
+      ]
+    },
+    {
+      id: 4,
+      category: 'hardware',
+      title: "Fingerprint and iris voting system",
+      student: "Hardware Security Batch",
+      desc: " •Facial Recognition Authentication •Secure Vote Casting •Automated Voter Verification •Real-Time LCD Guidance System •Audio & Visual Alert System",
+      tools: ["ESP32-CAM Module","ESP32 DevKit V1","16x2 LCD Display with I2C Module","Push Buttons","Active Buzzer","LED Indicators","OV2640 Camera Sensor"],
+      images: [
+        "/project-images/iris-voting/img1.jpg",
+        "/project-images/iris-voting/img2.jpg",
+      ]
+    },
+    {
+      id: 5,
+      category: 'software',
+      title: "Maternal Health Tracker",
+      student: "Software Development Batch",
+      desc: " •Maternal Health Monitoring System •Real-Time Body Temperature Tracking •Automatic Fall Detection & Emergency Alerts •BLE-Based Mobile App Connectivity •Doctor & Patient Real-Time Monitoring Dashboard",
+      tools: ["ESP32 Development Board","MAX30102 Sensor","MPU6050 Sensor","Temperature Sensor","Li-ion Battery","React Native","Spring Boot","MySQL Database"],
+      images: [
+        "/project-images/maternal-health/img1.jpg",
+        "/project-images/maternal-health/img2.jpg",
+        "/project-images/maternal-health/img3.jpg",
+        "/project-images/maternal-health/img4.jpg",
+        "/project-images/maternal-health/img5.jpg",
+        "/project-images/maternal-health/img6.jpg",
+      ]
+    },
+    {
+      id: 6,
+      category: 'embedded',
+      title: "Smart Plant Monitoring system using Raspberry pi and ESP32",
+      student: "Embedded Systems Batch",
+      desc: "•Dynamic Product Catalog System •Secure UPI Payment Verification •Automated WhatsApp Order Routing •Hyper-Local Multi-State SEO Optimization •Fully Responsive Cross-Browser Design",
+      tools: ["React.js","TailwindCSS","FramerMotion","Node.js","Express.js","MongoDB Atlas"],
+      images: [
+        "/project-images/smart-plant/img1.jpg",
+        "/project-images/smart-plant/img2.jpg",
+      ]
+    },
+    {
+      id: 7,
+      category: 'hardware',
+      title: "Intelligent Mobility and Safety Assistance System for Visually Impaired Individuals",
+      student: "Hardware & AI Batch",
+      desc: "•Real-Time Object Detection •Face Recognition System •OCR-Based Text Reading •Voice Command Navigation •Bluetooth Audio Assistance",
+      tools: ["Raspberry Pi", "Python", "TensorFlow", "Ultralytics", "EasyOCR", "Pyttsx3", "SpeechRecognition"],
+      images: [
+        "/project-images/safety-assist/img1.jpg",
+      ]
+    },
+    {
+      id: 8,
+      category: 'embedded',
+      title: "Smart Traffic Accident Hotspot Prediction and Prevention System",
+      student: "Embedded & Web Batch",
+      desc: "•Real-Time Safety Monitoring • Emergency Alerts • Sensor-Based Detection • Live Dashboard • Automated Notifications • Risk Analysis",
+      tools: [" Arduino/ESP32","Smoke Sensor","Temperature Sensor","Gas Sensor","Buzzer","LED Indicators","FastAPI","React","IoT Sensors","Arduino IDE","Cloud Monitoring Systems"],
+      images: [
+        "/project-images/traffic-accidents/img1.png",
+        "/project-images/traffic-accidents/img2.png",
+        "/project-images/traffic-accidents/img3.png",
+        "/project-images/traffic-accidents/img4.png",
+        "/project-images/traffic-accidents/img5.png",
+        "/project-images/traffic-accidents/img6.png",
+      ]
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 pt-16 overflow-x-hidden selection:bg-indigo-600 selection:text-white">
@@ -119,32 +287,82 @@ const StudentProjects = () => {
 
       {/* 5. PROJECT REPOSITORY */}
       <section id="repository" className="max-w-7xl mx-auto px-6 py-32">
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 uppercase tracking-tight mb-2">{sp.repository.heading}</h2>
-          <p className="text-slate-400 font-extrabold uppercase text-[10px] tracking-[0.4em]">{sp.repository.subtitle}</p>
+        <div className="mb-16 flex flex-col sm:flex-row sm:items-end gap-6 justify-between">
+          <div>
+            <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 uppercase tracking-tight mb-2">Project Repository.</h2>
+            <p className="text-slate-400 font-extrabold uppercase text-[10px] tracking-[0.4em]">Active Knowledge Repository Hub</p>
+          </div>
+
+          {/* ── DROPDOWN FILTER ── */}
+          <div className="relative">
+            <button
+              onClick={() => setFilterOpen(prev => !prev)}
+              className="flex items-center gap-3 bg-white border border-slate-200 hover:border-indigo-400 shadow-sm px-5 py-3 rounded-xl font-extrabold text-[10px] uppercase tracking-widest text-slate-700 hover:text-indigo-600 transition-all min-w-[180px] justify-between"
+            >
+              <span>{nodeFilters.find(f => f.value === activeFilter)?.label}</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${filterOpen ? 'rotate-180' : ''}`}
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {filterOpen && (
+                <motion.ul
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 mt-2 w-full bg-white border border-slate-100 rounded-xl shadow-2xl overflow-hidden z-50"
+                >
+                  {nodeFilters.map(f => (
+                    <li key={f.value}>
+                      <button
+                        onClick={() => { setActiveFilter(f.value); setFilterOpen(false); }}
+                        className={`w-full text-left px-5 py-3 text-[10px] font-extrabold uppercase tracking-widest transition-colors
+                          ${activeFilter === f.value
+                            ? 'bg-indigo-600 text-white'
+                            : 'text-slate-600 hover:bg-indigo-50 hover:text-indigo-600'
+                          }`}
+                      >
+                        {f.label}
+                      </button>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sp.repository.projects.map((project) => (
-            <motion.div key={project._id}
-              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-              className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all overflow-hidden flex flex-col group h-full">
-              <div className="h-56 overflow-hidden relative">
-                <img src={project.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={project.title} />
-                <div className="absolute top-5 left-5">
-                  <span className="bg-white/95 px-3 py-1.5 rounded-lg text-[9px] font-extrabold text-indigo-600 uppercase shadow-sm border border-indigo-50">
-                    {project.category} node
-                  </span>
-                </div>
-              </div>
-              <div className="p-10 flex-grow flex flex-col">
-                <h3 className="text-xl font-extrabold text-slate-900 mb-3 uppercase tracking-tight">{project.title}</h3>
-                <p className="text-[13px] text-slate-500 font-bold mb-6 leading-relaxed border-l-2 border-indigo-100 pl-4">{project.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tools.map((t, idx) => (
-                    <span key={idx} className="bg-slate-50 text-slate-600 px-3 py-1 rounded-md text-[9px] font-extrabold uppercase tracking-tight">{t}</span>
-                  ))}
-                </div>
-              </div>
+          {projects.filter(p => activeFilter === 'all' || p.category === activeFilter).map((project) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all overflow-hidden flex flex-col group h-full"
+            >
+               <div className="h-56 overflow-hidden relative">
+                  <ImageSlideshow images={project.images} interval={3500} className="w-full h-full" />
+                  <div className="absolute top-5 left-5 z-10">
+                      <span className="bg-white/95 px-3 py-1.5 rounded-lg text-[9px] font-extrabold text-indigo-600 uppercase shadow-sm border border-indigo-50">
+                          {project.category} node
+                      </span>
+                  </div>
+               </div>
+               <div className="p-10 flex-grow flex flex-col">
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-3 uppercase tracking-tight">{project.title}</h3>
+                  <p className="text-[13px] text-slate-500 font-bold mb-6 leading-relaxed border-l-2 border-indigo-100 pl-4">{project.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                      {project.tools.map((t, idx) => (
+                        <span key={idx} className="bg-slate-50 text-slate-600 px-3 py-1 rounded-md text-[9px] font-extrabold uppercase tracking-tight">
+                          {t}
+                        </span>
+                      ))}
+                  </div>
+               </div>
             </motion.div>
           ))}
         </div>
@@ -165,25 +383,27 @@ const StudentProjects = () => {
 
       {/* 7. CTA */}
       <section className="py-40 text-center bg-white relative overflow-hidden">
-        <motion.div whileInView={{ scale: [0.9, 1], opacity: [0, 1] }}
-          className="max-w-4xl mx-auto bg-slate-900 p-20 rounded-[4rem] shadow-4xl relative overflow-hidden text-white">
-          <FaRocket className="text-[15rem] text-indigo-600/10 absolute -top-20 -right-20 -rotate-45" />
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-10 uppercase tracking-tighter">
-            {ctaLines.map((line, i) => (
-              <React.Fragment key={i}>
-                {i === 0 ? line : <span className="text-white">{line}</span>}
-                {i < ctaLines.length - 1 && <br />}
-              </React.Fragment>
-            ))}
-          </h2>
-          <p className="max-w-xl mx-auto text-slate-400 font-bold uppercase text-xs mb-12 tracking-widest">
-            {sp.cta.description}
-          </p>
-          <a href={waLink} target="_blank" rel="noopener noreferrer"
-            className="inline-block bg-indigo-600 text-white px-16 py-6 rounded-2xl font-extrabold text-xs uppercase tracking-[0.4em] hover:bg-white hover:text-indigo-600 transition-all transform hover:-translate-y-2">
-            {sp.cta.buttonText}
-          </a>
-        </motion.div>
+          <motion.div 
+            whileInView={{ scale: [0.9, 1], opacity: [0, 1] }}
+            className="max-w-4xl mx-auto bg-slate-900 p-20 rounded-[4rem] shadow-4xl relative overflow-hidden text-white"
+          >
+             <FaRocketLaunch className="text-[15rem] text-indigo-600/10 absolute -top-20 -right-20 -rotate-45" />
+             <h2 className="text-4xl md:text-5xl font-extrabold mb-10 uppercase tracking-tighter">
+               Activate Your <br/><span className="text-white">Project</span>
+             </h2>
+             <p className="max-w-xl mx-auto text-slate-400 font-bold uppercase text-xs mb-12 tracking-widest">
+               Join our next batch of student innovators and turn your ideas into physical industrial mastery.
+             </p>
+             <a
+               href="https://wa.me/919500181230?text=Hello%20DVein%20Team,%20I%20am%20interested%20in%20launching%20a%20project%20node."
+               target="_blank"
+               rel="noopener noreferrer"
+               className="inline-block bg-indigo-600 text-white px-16 py-6 rounded-2xl font-extrabold text-xs uppercase tracking-[0.4em] shadow-3xl hover:bg-white hover:text-indigo-600 transition-all transform hover:-translate-y-2"
+             >
+                Launch Project 
+             </a>
+          </motion.div>
+         
       </section>
 
     </div>
