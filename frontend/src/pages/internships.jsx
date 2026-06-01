@@ -15,7 +15,7 @@ const cardGradients = [
   'from-indigo-100 via-indigo-50 to-blue-50',
   'from-teal-100 via-cyan-50 to-sky-50',
   'from-orange-100 via-amber-50 to-yellow-50',
-  'from-slate-100 via-gray-50 to-zinc-50',
+  'from-purple-100 via-violet-50 to-fuchsia-50',
   'from-sky-100 via-sky-50 to-blue-50',
   'from-cyan-100 via-blue-50 to-indigo-50',
   'from-pink-100 via-rose-50 to-fuchsia-50',
@@ -47,7 +47,7 @@ const STATIC_DATA = {
     { _id: 4,  title: "AI & Machine Learning",          iconName: "FaRobot",           color: "text-indigo-600",  desc: "Supervised, unsupervised, and deep learning models built for real production deployments.",                skills: ["TensorFlow", "PyTorch", "Scikit-learn", "LLMs"] },
     { _id: 5,  title: "Data Analytics",                 iconName: "FaChartBar",        color: "text-teal-600",    desc: "Transform raw data into actionable insights using SQL, Excel, Power BI, and Tableau.",                   skills: ["SQL", "Excel", "Power BI", "Tableau"] },
     { _id: 6,  title: "Business Analytics",             iconName: "FaChartLine",       color: "text-orange-600",  desc: "Drive strategic decisions through data-driven business modelling, KPIs, and BI dashboards.",             skills: ["Strategy", "BI Tools", "KPIs", "Reporting"] },
-    { _id: 7,  title: "DevOps",                         iconName: "FaCogs",            color: "text-slate-600",   desc: "CI/CD pipelines, containerisation, and infrastructure automation for modern software delivery.",         skills: ["Docker", "CI/CD", "Kubernetes", "Jenkins"] },
+    { _id: 7,  title: "Software Testing",               iconName: "FaBug",             color: "text-purple-600",  desc: "Manual and automated testing, test case design, and QA methodologies for production-grade software.",   skills: ["Manual Testing", "Selenium", "Postman", "Test Plans"] },
     { _id: 8,  title: "Cloud Computing",                iconName: "FaCloud",           color: "text-sky-600",     desc: "Deploy, scale, and manage applications on AWS, Azure, and GCP with cloud-native best practices.",        skills: ["AWS", "Azure", "GCP", "Terraform"] },
     { _id: 9,  title: "MERN Stack",                     iconName: "FaLayerGroup",      color: "text-blue-500",    desc: "Full-stack web apps with MongoDB, Express, React, and Node.js in a cohesive modern workflow.",           skills: ["MongoDB", "Express", "React", "Node.js"] },
     { _id: 10, title: "UI/UX Design and Prototyping",   iconName: "FaDraftingCompass", color: "text-pink-600",    desc: "Design intuitive user interfaces and interactive prototypes using Figma and design system principles.",    skills: ["Figma", "Prototyping", "Wireframes", "User Research"] },
@@ -60,7 +60,7 @@ const STATIC_DATA = {
     { _id: 17, title: "HR - Marketing",                 iconName: "FaBullhorn",        color: "text-rose-600",    desc: "Employer branding, talent marketing strategies, and HR communication for modern organisations.",         skills: ["Employer Branding", "Recruitment Mktg", "LinkedIn", "Analytics"] },
     { _id: 18, title: "HR - Finance & Accounting",      iconName: "FaMoneyBillWave",   color: "text-emerald-600", desc: "Payroll management, financial reporting, and accounting fundamentals for HR professionals.",            skills: ["Payroll", "Tally", "Budgeting", "Compliance"] },
     { _id: 19, title: "Digital Marketing",              iconName: "FaBullseye",        color: "text-orange-500",  desc: "SEO, paid advertising, social media strategy, and analytics for impactful digital campaigns.",          skills: ["SEO", "Google Ads", "Social Media", "Analytics"] },
-    { _id: 20, title: "Software Testing",               iconName: "FaBug",             color: "text-cyan-600",    desc: "Manual and automated testing, test case design, and QA methodologies for production-grade software.",   skills: ["Manual Testing", "Selenium", "Jest", "Test Plans"] },
+    { _id: 20, title: "DevOps",                         iconName: "FaCogs",            color: "text-slate-600",   desc: "CI/CD pipelines, containerisation, and infrastructure automation for modern software delivery.",         skills: ["Docker", "CI/CD", "Kubernetes", "Jenkins"] },
   ],
   curriculum: {
     web: [
@@ -186,7 +186,7 @@ const Training = () => {
         <div className="animate-marquee inline-block whitespace-nowrap">
           {[1,2,3].map(i => (
             <span key={i} className="mx-10 text-gray-900 font-black text-xl uppercase tracking-tighter">
-              200+ Students &bull; 100+ Projects &bull; 20+ Courses &bull;
+              1000+ Students &bull; 500+ Projects &bull; 20+ Courses &bull;
             </span>
           ))}
         </div>
@@ -316,7 +316,7 @@ const Training = () => {
                   <option value="AI & Machine Learning">AI &amp; Machine Learning</option>
                   <option value="Data Analytics">Data Analytics</option>
                   <option value="Business Analytics">Business Analytics</option>
-                  <option value="DevOps">DevOps</option>
+
                   <option value="Cloud Computing">Cloud Computing</option>
                   <option value="MERN Stack">MERN Stack</option>
                   <option value="UI/UX Design and Prototyping">UI/UX Design and Prototyping</option>
@@ -330,6 +330,7 @@ const Training = () => {
                   <option value="HR - Finance & Accounting">HR - Finance &amp; Accounting</option>
                   <option value="Digital Marketing">Digital Marketing</option>
                   <option value="Software Testing">Software Testing</option>
+                  <option value="DevOps">DevOps</option>
                 </select>
               </div>
 
