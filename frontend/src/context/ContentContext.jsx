@@ -136,17 +136,21 @@ export const defaultContent = {
     eyebrow: "Our People",
     heading: "Meet the Crew",
     members: [
-      { id: 1,  name: "Navin",       role: "Founder & Director",        image: "navin.png"       },
-      { id: 2,  name: "Arsal",       role: "Co-Founder",                image: "arsal.png"       },
-      { id: 3,  name: "Suriya",      role: "Lead Developer",            image: "suriya.jpeg"     },
-      { id: 4,  name: "Nivash",      role: "Full Stack Developer",      image: "nivash.jpeg"     },
-      { id: 5,  name: "Prasanth",    role: "Software Engineer",         image: "prasanth.jpeg"   },
-      { id: 6,  name: "Munik",       role: "UI/UX Designer",           image: "munik.jpeg"      },
-      { id: 7,  name: "Jayasri",     role: "Project Manager",           image: "jayasri.jpeg"    },
-      { id: 8,  name: "Selvamani",   role: "Backend Developer",         image: "selvamani.jpeg"  },
-      { id: 9,  name: "Sidhar",      role: "Embedded Systems Engineer", image: "sidhar.jpeg"     },
-      { id: 10, name: "Aruna",       role: "Training Coordinator",      image: "aruna.jpeg"      },
-      { id: 11, name: "Yasik",       role: "AI/ML Engineer",            image: "Yasik.png"       },
+      { id: 1,  name: "Ms. Gopika Ayyavu",    role: "Founder & CEO",           image: "dir.jpeg"         },
+      { id: 2,  name: "Mr. Logesh",           role: "Manager Director",        image: "manager.jpeg"     },
+      { id: 3,  name: "Ms. Sahana",           role: "Executive Head",          image: "executive.jpeg"   },
+      { id: 4,  name: "Ms. Jayasri",          role: "HR Executive",            image: "jayasri.jpeg"     },
+      { id: 5,  name: "Ms. Aruna",            role: "HR",                      image: "aruna.jpeg"       },
+      { id: 6,  name: "Ms. Gowsalya",         role: "Data Analyst",            image: "kaviya.jpeg"      },
+      { id: 7,  name: "Mr. Navin",            role: "Software Developer",      image: "navin.png"        },
+      { id: 8,  name: "Mr. Selvamani",        role: "Software Developer",      image: "selvamani.jpeg"   },
+      { id: 9,  name: "Mr. Muniyappan",       role: "Data Analyst",            image: "munik.jpeg"       },
+      { id: 10, name: "Mr. Sidharraj",        role: "Business Analyst",        image: "sidhar.jpeg"      },
+      { id: 11, name: "Mr. Yasik",            role: "Devops Engineer",         image: "yasik.png"        },
+      { id: 12, name: "Mr. Suriya",           role: "Data Science Engineer",   image: "suriya.jpeg"      },
+      { id: 13, name: "Mr. Nivash",           role: "Software Developer",      image: "nivash.jpeg"      },
+      { id: 14, name: "Mr. Prasanth",         role: "Software Developer",      image: "prasanth.jpeg"    },
+      { id: 15, name: "Mr. Arsal",            role: "Software Developer",      image: "arsal.png"        },
     ]
   },
 
@@ -241,12 +245,12 @@ export const defaultContent = {
       ]
     },
     reviews: {
-      heading: "Loved by Global Partners",
-      googleBadge: "Rated 5.0 Google Reviews",
+      heading: "Trusted by Leading Enterprises",
+      googleBadge: "Rated 5.0 on Google Reviews",
       items: [
-        { id: 1, name: "Sriram K.",  role: "Intern Node",       text: "The internship gave me practical exposure to real datasets.", rating: 5 },
-        { id: 2, name: "Divya R.",   role: "Enterprise Client",  text: "DVein delivered our mobile node ahead of schedule.", rating: 5 },
-        { id: 3, name: "Arun Vijay", role: "Full Stack Student", text: "Mentors teach real industry standards.", rating: 5 }
+        { id: 1, name: "Rajesh M.",      role: "Tech Lead",              text: "DVein's product solutions are enterprise-grade and highly scalable. Excellent support team.", rating: 5 },
+        { id: 2, name: "Neha Sharma",    role: "CTO - FinTech",          text: "Their AI integration capabilities transformed our data processing pipeline. Highly recommended.", rating: 5 },
+        { id: 3, name: "Vikram Singh",   role: "Product Manager",        text: "Working with DVein has been a game-changer for our development velocity and code quality.", rating: 5 }
       ]
     },
     faq: {
